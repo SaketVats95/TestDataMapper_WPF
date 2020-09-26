@@ -259,7 +259,7 @@ namespace TestDataMapper
         }
         public DataTable CreateColumnMapperTable(List<string> uniqueColumnValues, string columnName)
         {
-            DataTable dt = new DataTable(currentProcessingTable.TableName+"-"+columnName+"-Column");
+            DataTable dt = new DataTable(currentProcessingTable.TableName+"|"+columnName+"|Column");
             dt.Columns.Add("OriginalValue",typeof(string));
             dt.Columns.Add("MappingValue", typeof(string));
             foreach (string value in uniqueColumnValues)

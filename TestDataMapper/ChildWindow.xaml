@@ -31,6 +31,8 @@
         <!-- Footer Panel -->
         <Grid Grid.Row="2" Background="#CCFFCC" Height="50">
             <!-- Replace this TextBlock with your footer content. -->
+            <Label x:Name="lblTotalCount" Content="Unique Count : 0" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold" FontStyle="Italic" FontSize="22" FontFamily="Sitka Text" />
+            <Label x:Name="lblSavedFilePath" Content="Saved File Path" HorizontalAlignment="Left" VerticalAlignment="Center"  FontSize="10" FontFamily="Sitka Text" Margin="230,6,0,7" Visibility="Hidden"/>
             <Button x:Name="btnSaveChanges" Content="Save Changes" HorizontalAlignment="Center"  VerticalAlignment="Top" Width="100" Click="btnSaveChanges_Click" Margin="490,0,171.6,0" Height="49"/>
             <Button x:Name="btnResetChanges" Content="Reset Changes"  HorizontalAlignment="Center"  VerticalAlignment="Top" Width="100" Click="btnResetChanges_Click" Margin="618,0,40.6,0" Height="50"/>
         </Grid>
