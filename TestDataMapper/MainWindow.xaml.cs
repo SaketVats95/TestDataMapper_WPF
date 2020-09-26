@@ -215,9 +215,11 @@ namespace TestDataMapper
             //        lbFiles.Items.Add(Path.GetFileName(filename));
             //}
             #endregion
-
-            UpdateAllSheetNames(txtboxTestFileName.Text);
-           GenetateRadioButtonList(allSheetName, stPanelSheetNames);
+            if (txtboxTestFileName.Text != "")
+            {
+                UpdateAllSheetNames(txtboxTestFileName.Text);
+                GenetateRadioButtonList(allSheetName, stPanelSheetNames);
+            }
         }
 
         private void btnLoadExcelSheet_Click(object sender, RoutedEventArgs e)
@@ -247,13 +249,16 @@ namespace TestDataMapper
         {
             
             //DataTable dt = CreateColumnMapperTable(, columnNames);
-                ChildWindow chldWindow = new ChildWindow();
+                //ChildWindow chldWindow = new ChildWindow();
             //MessageBox.Show(chldWindow.Getmessage());
             //chldWindow.ShowDialog();
-            chldWindow.Show();
+            
             //var wnd = new Window();
             //wnd.Owner = this;
             //wnd.Show();
+
+            MappingWindow chldWindow = new MappingWindow();
+            chldWindow.Show();
 
 
         }
