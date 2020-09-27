@@ -72,6 +72,27 @@ namespace TestDataMapper
             }
            
         }
+        private void btnSavetoExcelSheet_Click(object sender, RoutedEventArgs e)
+        {
+            if (dataTable != null)
+            {
+                Microsoft.Win32.SaveFileDialog dlg = new Microsoft.Win32.SaveFileDialog();
+                dlg.FileName = "Book1"; // Default file name
+                dlg.DefaultExt = ".xlsx"; // Default file extension
+                dlg.Filter = "Excel documents (.xlsx)|*.xlsx"; // Filter files by extension
+
+                // Show save file dialog box
+                Nullable<bool> result = dlg.ShowDialog();
+
+                // Process save file dialog box results
+                if (result == true)
+                {
+                    string filename = dlg.FileName;
+                    ReadWriteExcelSheet readWriteExcelSheet = new ReadWriteExcelSheet();
+                    readWriteExcelSheet.WriteToExcel(dataTable, filename);
+                }
+            }
+        }
 
         public Label addLabelWithClickEvent(string content)
         {

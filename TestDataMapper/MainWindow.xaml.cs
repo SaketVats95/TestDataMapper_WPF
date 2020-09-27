@@ -257,11 +257,11 @@ namespace TestDataMapper
             //wnd.Owner = this;
             //wnd.Show();
 
-            //MappingWindow chldWindow = new MappingWindow(currentProcessingTable);
-            //chldWindow.Show();
-
-            DataTablePreview chldWindow = new DataTablePreview(currentProcessingTable);
+            MappingWindow chldWindow = new MappingWindow(currentProcessingTable);
             chldWindow.Show();
+
+            //DataTablePreview chldWindow = new DataTablePreview(currentProcessingTable);
+            //chldWindow.Show();
 
         }
         public DataTable CreateColumnMapperTable(List<string> uniqueColumnValues, string columnName)
