@@ -308,5 +308,11 @@ namespace TestDataMapper
             DataTablePreview dataTablePreview = new DataTablePreview(currentProcessingTable);
             dataTablePreview.Show();
         }
+
+        private void BtnExecuteMapping_Click(object sender, RoutedEventArgs e)
+        {
+            MappingWindow mappingWindow = new MappingWindow(currentProcessingTable);
+            mappingWindow.Show();
+        }
     }
 }

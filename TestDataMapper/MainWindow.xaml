@@ -32,6 +32,8 @@
             <Button x:Name="btnLoadExcelSheet" Content="Load Table" Background="YellowGreen" Margin="10,10,20,10" Width="100" Height="50" HorizontalAlignment="Left"  VerticalAlignment="Top"  Click="btnLoadExcelSheet_Click" />
             <Button x:Name="btnProcessDC" Content="Column Mapping" Background="YellowGreen" Margin="10,10,20,10" Width="100" Height="50" HorizontalAlignment="Left"  VerticalAlignment="Top"  Click="BtnProcessCol_Click" />
             <Button x:Name="btnPreviewDT" Content="Preview Table"  Background="YellowGreen" Margin="10,10,20,10" Width="100" Height="50" HorizontalAlignment="Left"  VerticalAlignment="Top" Click="BtnPreviewDT_Click"  />
+            <Button x:Name="btnExecuteMapping" Content="Execute Mapping"  Background="YellowGreen" Margin="10,10,20,10" Width="100" Height="50" HorizontalAlignment="Left"  VerticalAlignment="Top" Click="BtnExecuteMapping_Click"   />
+
             <Button x:Name="btnclick" Content="Click Me"  Background="YellowGreen" Margin="10,10,20,10" Width="100" Height="50" HorizontalAlignment="Left"  VerticalAlignment="Top"  Click="Button_Click" Visibility="Hidden"/>
 
         </WrapPanel>
