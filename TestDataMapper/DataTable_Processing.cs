@@ -31,6 +31,20 @@ namespace TestDataMapper
         //    { }
 
         //}
+        public void AddNewColumn(ref DataTable dt, string columnName, string expression)
+        {
+            DataColumn newColumn = new DataColumn(columnName);
+            newColumn.DataType = System.Type.GetType("System.String");
+            newColumn.Expression = expression;
+
+            // Add columns to DataTable.
+            dt.Columns.Add(newColumn);
+        }
+        public DataTable ConvertJsonStrToDT(string jsonStr)
+        {
+            DataTable dt = (DataTable)JsonConvert.DeserializeObject(jsonStr, (typeof(DataTable)));
+            return dt;
+        }
         public void MappingOnDataTableColumn(ref DataTable dt,string columnName, Dictionary<string,string> mappingData)
         {
             // To Copy distinct values from col1 to a different datatable

@@ -37,11 +37,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DotNetProjects.Wpf.Extended.Toolkit, Version=4.6.86.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
-      <HintPath>..\packages\DotNetProjects.Extended.Wpf.Toolkit.4.6.86\lib\net40\DotNetProjects.Wpf.Extended.Toolkit.dll</HintPath>
-    </Reference>
-    <Reference Include="ICSharpCode.AvalonEdit">
-      <HintPath>..\..\..\Application\TAC\Test Automation Center\Bin\ICSharpCode.AvalonEdit.dll</HintPath>
+    <Reference Include="ExtendedGrid">
+      <HintPath>..\..\..\..\..\..\Downloads\WPFExtendedDataGrid\sourceCode\sourceCode\WPF Extended DataGrid 2015\ExtendedGrid\bin\Debug\ExtendedGrid.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.WindowsAPICodePack, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\WindowsAPICodePack-Core.1.1.1\lib\Microsoft.WindowsAPICodePack.dll</HintPath>

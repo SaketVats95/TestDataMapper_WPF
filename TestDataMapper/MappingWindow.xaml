@@ -31,17 +31,7 @@
             <Border Grid.Row="0" Background="#FFCCCC" Padding="11">
                 <!-- Replace this TextBlock with your upper body content. -->
                 <WrapPanel x:Name="wdPanelMapColList" >
-                    <Label Margin="10,10,10,10" Height="50" Background="#FFB2E08B" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"  Content=" Hello World" FontWeight="Bold" FontSize="18" FontFamily="SimSun" />
-                    <Label Margin="10,10,10,10" Height="50" Background="#FFB2E08B" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"  Content=" Hello World" FontWeight="Bold" FontSize="18" FontFamily="SimSun" />
-                    <Label Margin="10,10,10,10" Height="50" Background="#FFB2E08B" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"  Content=" Hello World" FontWeight="Bold" FontSize="18" FontFamily="SimSun" />
-                    <Label Margin="10,10,10,10" Height="50" Background="#FFB2E08B" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"  Content=" Hello World" FontWeight="Bold" FontSize="18" FontFamily="SimSun" />
-                    <Label Margin="10,10,10,10" Height="50" Background="#FFB2E08B" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"  Content=" Hello World" FontWeight="Bold" FontSize="18" FontFamily="SimSun" />
-                    <Label Margin="10,10,10,10" Height="50" Background="#FFB2E08B" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"  Content=" Hello World" FontWeight="Bold" FontSize="18" FontFamily="SimSun" />
-                    <Label Margin="10,10,10,10" Height="50" Background="#FFB2E08B" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"  Content=" Hello World" FontWeight="Bold" FontSize="18" FontFamily="SimSun" />
-                    <Label Margin="10,10,10,10" Height="50" Background="#FFB2E08B" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"  Content=" Hello World" FontWeight="Bold" FontSize="18" FontFamily="SimSun" />
-                    <Label Margin="10,10,10,10" Height="50" Background="#FFB2E08B" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"  Content=" Hello World" FontWeight="Bold" FontSize="18" FontFamily="SimSun" />
-                    <Label Margin="10,10,10,10" Height="50" Background="#FFB2E08B" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"  Content=" Hello World" FontWeight="Bold" FontSize="18" FontFamily="SimSun" />
-
+                    
                 </WrapPanel>
             </Border>
         </Grid>

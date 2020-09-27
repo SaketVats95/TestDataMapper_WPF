@@ -86,13 +86,22 @@ namespace TestDataMapper
             l.FontWeight = FontWeights.Bold;
             l.FontFamily = new FontFamily("SimSun");
             l.MouseDoubleClick += MyButton_DoubleClick; 
+            //l.MouseDown
             return l;
 
         }
         public void MyButton_DoubleClick(object sender, RoutedEventArgs e)
         {
             Label l = (Label)sender;
-            MessageBox.Show(l.Content.ToString());
+            //MessageBox.Show(l.Content.ToString());
+            string jsonData = ReadFileDataContent(txtboxMappingFolderPath.Text + "\\" + l.Content.ToString());
+            if (jsonData != "")
+            {
+                DataTable_Processing dataTable_Processing = new DataTable_Processing();
+                DataTable dt = dataTable_Processing.ConvertJsonStrToDT(jsonData);
+                ChildWindow chldWindow = new ChildWindow(dt);
+                chldWindow.Show();
+            }
         }
 
         public void btnProcessMapping_Click(object sender, RoutedEventArgs e)
@@ -114,17 +123,22 @@ namespace TestDataMapper
         public Dictionary<string,string> ReadMappingFile(string filePath)
         {
             Dictionary < string, string> mappingDataDict= new Dictionary<string, string>();
-            string jsonData = "";
-            using (StreamReader sr = new StreamReader(filePath))
-            {
-               jsonData = sr.ReadToEnd();
-            }
+            string jsonData = ReadFileDataContent(filePath);
             if(jsonData != "")
                 {
                 DataTable_Processing dataTable_Processing = new DataTable_Processing();
                  mappingDataDict = dataTable_Processing.GetDictinaryFromJson(jsonData);
             }
             return mappingDataDict;
+        }
+        public string ReadFileDataContent(string filePath)
+        {
+            string jsonData = "";
+            using (StreamReader sr = new StreamReader(filePath))
+            {
+                jsonData = sr.ReadToEnd();
+            }
+            return jsonData;
         }
     }
 }
