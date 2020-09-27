@@ -38,12 +38,12 @@
         <!-- Footer Panel -->
         <Grid Grid.Row="3" Background="#CCFFCC">
             <Label x:Name="lblSheetNames" Content="Sheet Name" HorizontalAlignment="Left" Width="150" VerticalAlignment="Top" FontWeight="Bold" FontStyle="Italic" FontSize="20" FontFamily="Sitka Text" />
-            <ScrollViewer Height="150" Width="150" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,35,0,0">
+            <ScrollViewer Height="150" Width="150" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,35,0,0" ScrollViewer.HorizontalScrollBarVisibility="Visible">
                 <StackPanel x:Name="stPanelSheetNames" HorizontalAlignment="Left"  VerticalAlignment="Top" />
             </ScrollViewer>
             <Label x:Name="lblColumnNames" Content="Column Name" HorizontalAlignment="Left" Width="150" VerticalAlignment="Top" FontWeight="Bold" FontStyle="Italic" FontSize="20" FontFamily="Sitka Text" Margin="169,0,0,0" />
 
-            <ScrollViewer Height="150" Width="150" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="169,35,0,0" >
+            <ScrollViewer Height="150" Width="150" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="169,35,0,0" ScrollViewer.HorizontalScrollBarVisibility="Visible">
                 <StackPanel x:Name="stPanelColumnsName" HorizontalAlignment="Left" VerticalAlignment="Top"></StackPanel>
             </ScrollViewer>
             

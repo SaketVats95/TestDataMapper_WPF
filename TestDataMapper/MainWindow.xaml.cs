@@ -71,6 +71,7 @@ namespace TestDataMapper
             }
             currentProcessingTable = testTable;
             dgLoadTable.DataContext = currentProcessingTable;
+            DeleteAllChildElement(stPanelColumnsName);
             GenetateRadioButtonList(GetAllColumnNames(currentProcessingTable),stPanelColumnsName);
         }
 
@@ -181,11 +182,11 @@ namespace TestDataMapper
                 rb.FontSize = 14;
                 rb.FontStyle = FontStyles.Italic;
                 rb.FontWeight = FontWeights.DemiBold;
-                rb.Checked += (sender, args) =>
-                {
-                    Console.WriteLine("Pressed " + (sender as RadioButton).Tag);
-                };
-                rb.Unchecked += (sender, args) => { /* Do stuff */ };
+                //rb.Checked += (sender, args) =>
+                //{
+                //    Console.WriteLine("Pressed " + (sender as RadioButton).Tag);
+                //};
+                //rb.Unchecked += (sender, args) => { /* Do stuff */ };
                 rb.Tag = i;
                 if(i == 0)
                 {
@@ -222,6 +223,7 @@ namespace TestDataMapper
             if (txtboxTestFileName.Text != "")
             {
                 UpdateAllSheetNames(txtboxTestFileName.Text);
+                DeleteAllChildElement(stPanelSheetNames);
                 GenetateRadioButtonList(allSheetName, stPanelSheetNames);
             }
         }
@@ -250,8 +252,9 @@ namespace TestDataMapper
         }
         public void DeleteAllChildElement(StackPanel st)
         {
-            UIElementCollection childElements = stPanelSheetNames.Children;
-            foreach (UIElement child in childElements)
+            UIElementCollection childElements = st.Children;
+            int count = childElements.Count;
+            for (int i = 0; i<count; i++)
             {
                 //if (child.GetType() == typeof(RadioButton))
                 //{
@@ -261,7 +264,7 @@ namespace TestDataMapper
                 //        
                 //    }
                 //}
-                st.Children.Remove(child);
+                st.Children.RemoveAt(0);
             }
             
         }
