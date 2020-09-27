@@ -10,17 +10,48 @@
         xmlns:chartingToolkit="clr-namespace:System.Windows.Controls.DataVisualization.Charting;assembly=System.Windows.Controls.DataVisualization.Toolkit"
         Title="MainWindow">
     <Grid>
-        <Custom:DataGrid x:Name="dgLoadTable" HorizontalAlignment="Left" Margin="437,165,0,0" VerticalAlignment="Top" ItemsSource="{Binding}" AutomationProperties.IsColumnHeader="True"></Custom:DataGrid>
-        <TextBox x:Name="txtboxTestFileName" HorizontalAlignment="Left" Height="23" Margin="127,25,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="349"/>
-        <Button x:Name="btnTestFile" Content="Select" HorizontalAlignment="Left" Margin="520,25,0,0" VerticalAlignment="Top" Width="75" Click="BtnTestFile_Click"/>
-        <Label x:Name="lblTestFile" Content="Select Test File" HorizontalAlignment="Left" Margin="26,25,0,0" VerticalAlignment="Top"/>
-        <Button x:Name="btnLoadExcelSheet" Content="Show Table" HorizontalAlignment="Left" Margin="629,25,0,0" VerticalAlignment="Top" Width="75" Click="btnLoadExcelSheet_Click"/>
-        <Button x:Name="btnclick" Content="Click Me"  HorizontalAlignment="Left" Margin="629,65,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
-        <StackPanel x:Name="stPanelSheetNames" HorizontalAlignment="Left" Margin="12,97,0,0" VerticalAlignment="Top" Width="100" Height="100"/>
-            <StackPanel x:Name="stPanelColumnsName" HorizontalAlignment="Left" Margin="12,236,0,0" VerticalAlignment="Top">
-                <Button x:Name="btnProcessCol" Content="ProcessColumn" HorizontalAlignment="Center" VerticalAlignment="Bottom" Click="BtnProcessCol_Click"/>
-            </StackPanel>
-        <StackPanel x:Name="stPanelColumnMapper" HorizontalAlignment="Left" Margin="169,135,0,0" VerticalAlignment="Top"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <!-- Header Panel -->
+        <Border Grid.Row="0" Background="#CCCCCC" Padding="11" >
+            <!-- Replace this TextBlock with your header content. -->
+            <Label x:Name="lblColumnName" Content="Main Window" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" FontStyle="Italic" FontSize="20" FontFamily="Sitka Text" />
+        </Border>
+        <Grid Grid.Row="1" Background="#CCCCFF" >
+            <Label x:Name="lblTestFile" Content="Select Test File" HorizontalAlignment="Left" Margin="24,21,0,0" VerticalAlignment="Top"/>
+            <TextBox x:Name="txtboxTestFileName" HorizontalAlignment="Left" Height="23" Margin="127,21,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="400"/>
+                <Button x:Name="btnTestFile" Content="Select" HorizontalAlignment="Left" Margin="578,25,0,0" VerticalAlignment="Top" Width="75" Click="BtnTestFile_Click"/>
+        </Grid>
+        <WrapPanel Grid.Row="2" Background="#FF60A3BC">
+            <!-- Replace this TextBlock with your footer content. -->
+            <Button x:Name="btnLoadExcelSheet" Content="Load Table" Background="YellowGreen" Margin="10,10,20,10" Width="100" Height="50" HorizontalAlignment="Left"  VerticalAlignment="Top"  Click="btnLoadExcelSheet_Click" />
+            <Button x:Name="btnProcessDC" Content="Column Mapping" Background="YellowGreen" Margin="10,10,20,10" Width="100" Height="50" HorizontalAlignment="Left"  VerticalAlignment="Top"  Click="BtnProcessCol_Click" />
+            <Button x:Name="btnPreviewDT" Content="Preview Table"  Background="YellowGreen" Margin="10,10,20,10" Width="100" Height="50" HorizontalAlignment="Left"  VerticalAlignment="Top" Click="BtnPreviewDT_Click"  />
+            <Button x:Name="btnclick" Content="Click Me"  Background="YellowGreen" Margin="10,10,20,10" Width="100" Height="50" HorizontalAlignment="Left"  VerticalAlignment="Top"  Click="Button_Click" Visibility="Hidden"/>
+
+        </WrapPanel>
+        <!-- Footer Panel -->
+        <Grid Grid.Row="3" Background="#CCFFCC">
+            <Label x:Name="lblSheetNames" Content="Sheet Name" HorizontalAlignment="Left" Width="150" VerticalAlignment="Top" FontWeight="Bold" FontStyle="Italic" FontSize="20" FontFamily="Sitka Text" />
+            <ScrollViewer Height="150" Width="150" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,35,0,0">
+                <StackPanel x:Name="stPanelSheetNames" HorizontalAlignment="Left"  VerticalAlignment="Top" />
+            </ScrollViewer>
+            <Label x:Name="lblColumnNames" Content="Column Name" HorizontalAlignment="Left" Width="150" VerticalAlignment="Top" FontWeight="Bold" FontStyle="Italic" FontSize="20" FontFamily="Sitka Text" Margin="169,0,0,0" />
+
+            <ScrollViewer Height="150" Width="150" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="169,35,0,0" >
+                <StackPanel x:Name="stPanelColumnsName" HorizontalAlignment="Left" VerticalAlignment="Top"></StackPanel>
+            </ScrollViewer>
+            
+            <StackPanel x:Name="stPanelColumnMapper" HorizontalAlignment="Left" Margin="169,135,0,0" VerticalAlignment="Top" Visibility="Hidden"/>
+            <Custom:DataGrid x:Name="dgLoadTable" HorizontalAlignment="Left" Margin="383,22,0,0" VerticalAlignment="Top" ItemsSource="{Binding}" AutomationProperties.IsColumnHeader="True" RenderTransformOrigin="-0.208,-6.469"></Custom:DataGrid>
+
+        </Grid>
+        
         
     </Grid>
 </Window>

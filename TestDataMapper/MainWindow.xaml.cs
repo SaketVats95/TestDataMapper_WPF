@@ -177,6 +177,10 @@ namespace TestDataMapper
             foreach(string name in names)
             {
                 RadioButton rb = new RadioButton() { Content = name, IsChecked = i == 0 };
+                rb.Background = Brushes.Cyan;
+                rb.FontSize = 14;
+                rb.FontStyle = FontStyles.Italic;
+                rb.FontWeight = FontWeights.DemiBold;
                 rb.Checked += (sender, args) =>
                 {
                     Console.WriteLine("Pressed " + (sender as RadioButton).Tag);
@@ -244,6 +248,23 @@ namespace TestDataMapper
             }
             
         }
+        public void DeleteAllChildElement(StackPanel st)
+        {
+            UIElementCollection childElements = stPanelSheetNames.Children;
+            foreach (UIElement child in childElements)
+            {
+                //if (child.GetType() == typeof(RadioButton))
+                //{
+                //    RadioButton rb = (RadioButton)child;
+                //    if ((bool)rb.IsChecked)
+                //    {
+                //        
+                //    }
+                //}
+                st.Children.Remove(child);
+            }
+            
+        }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
@@ -277,6 +298,12 @@ namespace TestDataMapper
                 dt.Rows.Add(dr);
             }
             return dt;
+        }
+
+        private void BtnPreviewDT_Click(object sender, RoutedEventArgs e)
+        {
+            DataTablePreview dataTablePreview = new DataTablePreview(currentProcessingTable);
+            dataTablePreview.Show();
         }
     }
 }
