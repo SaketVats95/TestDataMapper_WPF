@@ -31,6 +31,26 @@ namespace TestDataMapper
         //    { }
 
         //}
+        public void MappingOnDataTableColumn(ref DataTable dt,string columnName, Dictionary<string,string> mappingData)
+        {
+            // To Copy distinct values from col1 to a different datatable
+            if(dt.Columns.Contains(columnName))
+            {
+                foreach (DataRow dr in dt.Rows)
+                {
+                    try
+                    {
+                        dr[columnName] = mappingData[dr[columnName].ToString()];
+                    }
+                    catch (Exception ex)
+                    {
+                        throw;        
+                    }
+                }
+            }
+            
+
+        }
         public List<string> GetColUniqueValues(DataTable dt, string columnName)
         {
             // To Copy distinct values from col1 to a different datatable
@@ -45,6 +65,29 @@ namespace TestDataMapper
             string JSONString = string.Empty;
             JSONString = JsonConvert.SerializeObject(table);
             return JSONString;
+        }
+        public Dictionary<string, string> GetDictinaryFromJson(string jsonData)
+        {
+            Dictionary<string, string> mappingDict = new Dictionary<string, string>();
+            var values = JsonConvert.DeserializeObject<List<Dictionary<string, string>>>(jsonData);
+            foreach (Dictionary<string, string> dict in values)
+            {
+                string key = "";
+                string value = "";
+                int count = 0;
+                foreach (KeyValuePair<string, string> keyValue in dict)
+                {
+                    if (count == 0)
+                        key = keyValue.Value;
+                    else
+                        value = keyValue.Value;
+                    count++;
+                }
+                if (!mappingDict.ContainsKey(key))
+                    mappingDict.Add(key, value);
+            }
+            return mappingDict;
+            //return values;
         }
         public static void ExecuteQueries(ref DataSet ds, string tableName, Dictionary<string, string> queries)
         {

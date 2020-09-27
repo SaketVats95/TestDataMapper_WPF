@@ -15,6 +15,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Windows.Forms;
 using Ookii.Dialogs.Wpf;
+using System.Data;
 
 namespace TestDataMapper
 {
@@ -23,9 +24,19 @@ namespace TestDataMapper
     /// </summary>
     public partial class MappingWindow : Window
     {
+        List<string> allfiles = new List<string>();
+        DataTable dataTable = new DataTable();
+        DataTable backupTable;
+
         public MappingWindow()
         {
             InitializeComponent();
+        }
+        public MappingWindow(DataTable dt)
+        {
+            InitializeComponent();
+            dataTable = dt;
+
         }
         public List<string> GetAllFiles(string dirPath)
         {
@@ -38,6 +49,7 @@ namespace TestDataMapper
                     files.Add(f.FullName);
                 }
             }
+            allfiles = files;
             return files;
         }
 
@@ -81,6 +93,38 @@ namespace TestDataMapper
         {
             Label l = (Label)sender;
             MessageBox.Show(l.Content.ToString());
+        }
+
+        public void btnProcessMapping_Click(object sender, RoutedEventArgs e)
+        {
+            backupTable = dataTable.Copy();
+            foreach (string f in allfiles)
+            {
+                Dictionary<string, string> mappingDataDic = ReadMappingFile(f);
+                if (mappingDataDic.Count > 0)
+                {
+                    DataTable_Processing dataTable_Processing = new DataTable_Processing();
+
+                    dataTable_Processing.MappingOnDataTableColumn(ref dataTable, System.IO.Path.GetFileNameWithoutExtension(f), mappingDataDic);
+                }
+            }
+            
+        }
+
+        public Dictionary<string,string> ReadMappingFile(string filePath)
+        {
+            Dictionary < string, string> mappingDataDict= new Dictionary<string, string>();
+            string jsonData = "";
+            using (StreamReader sr = new StreamReader(filePath))
+            {
+               jsonData = sr.ReadToEnd();
+            }
+            if(jsonData != "")
+                {
+                DataTable_Processing dataTable_Processing = new DataTable_Processing();
+                 mappingDataDict = dataTable_Processing.GetDictinaryFromJson(jsonData);
+            }
+            return mappingDataDict;
         }
     }
 }

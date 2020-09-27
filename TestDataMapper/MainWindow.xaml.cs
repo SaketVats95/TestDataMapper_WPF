@@ -257,7 +257,7 @@ namespace TestDataMapper
             //wnd.Owner = this;
             //wnd.Show();
 
-            MappingWindow chldWindow = new MappingWindow();
+            MappingWindow chldWindow = new MappingWindow(currentProcessingTable);
             chldWindow.Show();
 
 
