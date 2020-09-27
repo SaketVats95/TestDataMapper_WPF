@@ -247,19 +247,21 @@ namespace TestDataMapper
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            
+
             //DataTable dt = CreateColumnMapperTable(, columnNames);
-                //ChildWindow chldWindow = new ChildWindow();
+            //ChildWindow chldWindow = new ChildWindow();
             //MessageBox.Show(chldWindow.Getmessage());
             //chldWindow.ShowDialog();
-            
+
             //var wnd = new Window();
             //wnd.Owner = this;
             //wnd.Show();
 
-            MappingWindow chldWindow = new MappingWindow(currentProcessingTable);
-            chldWindow.Show();
+            //MappingWindow chldWindow = new MappingWindow(currentProcessingTable);
+            //chldWindow.Show();
 
+            DataTablePreview chldWindow = new DataTablePreview(currentProcessingTable);
+            chldWindow.Show();
 
         }
         public DataTable CreateColumnMapperTable(List<string> uniqueColumnValues, string columnName)

@@ -92,6 +92,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="DataTablePreview.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -102,6 +106,9 @@
     </Compile>
     <Compile Include="ChildWindow.xaml.cs">
       <DependentUpon>ChildWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="DataTablePreview.xaml.cs">
+      <DependentUpon>DataTablePreview.xaml</DependentUpon>
     </Compile>
     <Compile Include="DataTable_Processing.cs" />
     <Compile Include="MainWindow.xaml.cs">
