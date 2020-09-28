@@ -75,6 +75,7 @@ namespace TestDataMapper
                 Nullable<bool> result = dlg.ShowDialog();
 
                 // Process save file dialog box results
+
                 if (result == true)
                 {
                     string filename = dlg.FileName;
@@ -86,3 +87,4 @@ namespace TestDataMapper
     }
    
 }
+

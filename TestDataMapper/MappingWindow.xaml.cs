@@ -161,5 +161,11 @@ namespace TestDataMapper
             }
             return jsonData;
         }
+
+        private void BtnPreviewDT_Click(object sender, RoutedEventArgs e)
+        {
+            DataTablePreview dataTablePreview = new DataTablePreview(dataTable);
+            dataTablePreview.Show();
+        }
     }
 }

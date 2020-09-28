@@ -42,7 +42,7 @@ namespace TestDataMapper
             if (fileExt.CompareTo(".xls") == 0)
                 conn = @"provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + fileName + ";Extended Properties='Excel 8.0;HRD=Yes;IMEX=1';"; //for below excel 2007  
             else
-                conn = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + fileName + ";Extended Properties='Excel 12.0;HDR=NO';"; //for above excel 2007  
+                conn = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + fileName + ";Extended Properties='Excel 12.0;HDR=Yes';"; //for above excel 2007  
             using (OleDbConnection con = new OleDbConnection(conn))
             {
                 try
@@ -64,12 +64,13 @@ namespace TestDataMapper
             string extension = fi.Extension;
             string sheetName = GetSelectedRadioButton(stPanelSheetNames);
            DataTable dt = ReadExcelSheet(fileName, extension,sheetName);
-            DataTable testTable = ChangeColumnName(dt);
+            //DataTable testTable = ChangeColumnName(dt);
             if (!object.ReferenceEquals(currentProcessingTable, null))
             {
                 currentProcessingTable.Dispose();
             }
-            currentProcessingTable = testTable;
+            //currentProcessingTable = testTable;
+            currentProcessingTable = dt;
             dgLoadTable.DataContext = currentProcessingTable;
             DeleteAllChildElement(stPanelColumnsName);
             GenetateRadioButtonList(GetAllColumnNames(currentProcessingTable),stPanelColumnsName);
@@ -165,9 +166,14 @@ namespace TestDataMapper
                 }
                 con.Close();
             }
-            foreach (DataRow dr in dataTable.Rows)
+           
+            // skip those that do not end correctly
+            foreach (DataRow row in dataTable.Rows)
             {
-                allSheetName.Add(dr["TABLE_NAME"].ToString()); 
+                string sheetName = row["TABLE_NAME"].ToString();
+                if (!sheetName.EndsWith("$") && !sheetName.EndsWith("$'"))
+                    continue;
+                allSheetName.Add(row["TABLE_NAME"].ToString());
             }
 
         }
@@ -313,6 +319,23 @@ namespace TestDataMapper
         {
             MappingWindow mappingWindow = new MappingWindow(currentProcessingTable);
             mappingWindow.Show();
+        }
+
+        private void BtnProcessColName_Click(object sender, RoutedEventArgs e)
+        {
+            string seletedCol = "ColumnNameList";
+            List<string> uniqueValue = new List<string>();
+            foreach (DataColumn dc in currentProcessingTable.Columns)
+            {
+                uniqueValue.Add(dc.ColumnName);
+            }
+            if (uniqueValue.Count > 0)
+            {
+                DataTable dt = CreateColumnMapperTable(uniqueValue, seletedCol);
+                ChildWindow chldWindow = new ChildWindow(dt);
+                chldWindow.Show();
+            }
+
         }
     }
 }
