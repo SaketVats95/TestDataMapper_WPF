@@ -32,7 +32,7 @@ namespace TestDataMapper
         public ExpressionManager(DataTable dt, string jsonExpsData)
         {
             InitializeComponent();
-            dt_backUpDataTable = dt;
+            dt_OriginalDataTable = dt;
             DataTable_Processing dataTable_Processing = new DataTable_Processing();
             dt_expsInfoTable = dataTable_Processing.ConvertJsonStrToDT(jsonExpsData);
             if (dt_expsInfoTable.Rows.Count > 0)
@@ -49,7 +49,7 @@ namespace TestDataMapper
             DataTable_Processing dataTable_Processing = new DataTable_Processing();
             dt_backUpDataTable = dt_OriginalDataTable.Copy();
             
-            foreach (DataRow dr in dt_OriginalDataTable.Rows)
+            foreach (DataRow dr in dt_expsInfoTable.Rows)
             {
             if ((bool)dr["Status"])
             {

@@ -116,7 +116,7 @@ namespace TestDataMapper
             ExcelPackage excel = new ExcelPackage();
 
             //Add a new worksheet to workbook with the Datatable name
-            var workSheet = excel.Workbook.Worksheets.Add(table.TableName);
+            var workSheet = excel.Workbook.Worksheets.Add(table.TableName.Replace("'", "").Trim());
             //excelWorkSheet.Name = dr.Key.ToString();
             // setting the properties 
             // of the work sheet  

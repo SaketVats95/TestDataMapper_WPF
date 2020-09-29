@@ -58,7 +58,7 @@ namespace TestDataMapper
                     }
                     catch (Exception ex)
                     {
-                        throw;        
+                           
                     }
                 }
             }
@@ -92,13 +92,21 @@ namespace TestDataMapper
                 foreach (KeyValuePair<string, string> keyValue in dict)
                 {
                     if (count == 0)
-                        key = keyValue.Value;
-                    else
-                        value = keyValue.Value;
+                        if (keyValue.Value == null)
+                            key = "";
+                        else
+                            key = keyValue.Value;// keyValue.Value;
+                        else
+                            value = keyValue.Value;
                     count++;
                 }
-                if (!mappingDict.ContainsKey(key))
-                    mappingDict.Add(key, value);
+                try
+                {
+                    if (!mappingDict.ContainsKey(key))
+                        mappingDict.Add(key, value);
+                }
+                catch (Exception ex)
+                { }
             }
             return mappingDict;
             //return values;

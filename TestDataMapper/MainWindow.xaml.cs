@@ -343,5 +343,10 @@ namespace TestDataMapper
             ExpressionBuilder expressionBuilder = new ExpressionBuilder(currentProcessingTable);
             expressionBuilder.Show();
         }
+
+        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

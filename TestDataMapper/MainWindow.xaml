@@ -9,25 +9,49 @@
         mc:Ignorable="d"
         xmlns:chartingToolkit="clr-namespace:System.Windows.Controls.DataVisualization.Charting;assembly=System.Windows.Controls.DataVisualization.Toolkit"
         Title="MainWindow">
+    
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
+        <DockPanel Grid.Row="0">
+            <Menu DockPanel.Dock="Top">
+                <MenuItem Header="Processing Option">
+                    <MenuItem Header="Create Mapping">
+                        <MenuItem Header="Column Value" IsCheckable="False" Click="MenuItem_Click" />
+                        <MenuItem Header="Column Name" IsCheckable="False"/>
+                        <MenuItem Header="Expression Builder" IsCheckable="False"/>
+                    </MenuItem>
+                    <MenuItem Header="Execute Mapping">
+                    <MenuItem Header="Current Folder" IsCheckable="True" Click="MenuItem_Click" />
+                    <MenuItem Header="Select Folder" IsCheckable="False"/>
+                </MenuItem>
+                <MenuItem Header="Sub Items"/>
+
+
+                </MenuItem>
+            </Menu>
+            <StackPanel></StackPanel>
+        </DockPanel>
+
+
+
         <!-- Header Panel -->
-        <Border Grid.Row="0" Background="#CCCCCC" Padding="11" >
+        <Border Grid.Row="1" Background="#CCCCCC" Padding="11" >
             <!-- Replace this TextBlock with your header content. -->
             <Label x:Name="lblColumnName" Content="Main Window" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" FontStyle="Italic" FontSize="20" FontFamily="Sitka Text" />
         </Border>
-        <Grid Grid.Row="1" Background="#CCCCFF" >
+        <Grid Grid.Row="2" Background="#CCCCFF" >
             <Label x:Name="lblTestFile" Content="Select Test File" HorizontalAlignment="Left" Margin="24,21,0,0" VerticalAlignment="Top"/>
             <TextBox x:Name="txtboxTestFileName" HorizontalAlignment="Left" Height="23" Margin="127,21,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="400"/>
                 <Button x:Name="btnTestFile" Content="Select" HorizontalAlignment="Left" Margin="578,25,0,0" VerticalAlignment="Top" Width="75" Click="BtnTestFile_Click"/>
         </Grid>
-        <WrapPanel Grid.Row="2" Background="#FF60A3BC">
+        <WrapPanel Grid.Row="3" Background="#FF60A3BC">
             <!-- Replace this TextBlock with your footer content. -->
 
             <Button x:Name="btnLoadExcelSheet" Content="Load Table" Background="YellowGreen" Margin="10,10,10,10" Width="100" Height="50" HorizontalAlignment="Left"  VerticalAlignment="Top"  Click="btnLoadExcelSheet_Click" />
@@ -41,7 +65,7 @@
 
         </WrapPanel>
         <!-- Footer Panel -->
-        <Grid Grid.Row="3" Background="#CCFFCC">
+        <Grid Grid.Row="4" Background="#CCFFCC">
             <Label x:Name="lblSheetNames" Content="Sheet Name" HorizontalAlignment="Left" Width="150" VerticalAlignment="Top" FontWeight="Bold" FontStyle="Italic" FontSize="20" FontFamily="Sitka Text" />
             <ScrollViewer Height="150" Width="150" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,35,0,0" ScrollViewer.HorizontalScrollBarVisibility="Visible">
                 <StackPanel x:Name="stPanelSheetNames" HorizontalAlignment="Left"  VerticalAlignment="Top" />

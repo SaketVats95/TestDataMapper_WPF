@@ -49,8 +49,18 @@
 
         <!-- Footer Panel -->
         <Grid Grid.Row="3" Background="#CCFFCC">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="3*" />
+            </Grid.ColumnDefinitions>
+            <WrapPanel Grid.Column="0">
+                <Button x:Name="btnConcatenate" Content="Concat" FontWeight="DemiBold" Width="100"  Margin="5,5,5,5" Height="30" Click="BtnConcatStr_Click"/>
+                <Button x:Name="btnSplit" Content="Split" FontWeight="DemiBold" Width="100"  Margin="5,5,5,5" Height="30" />
+
+
+            </WrapPanel>
             <!-- Replace this TextBlock with your footer content. -->
-            <DataGrid x:Name="dgLoadMappingTable" HorizontalAlignment="Center"  VerticalAlignment="Center" ItemsSource="{Binding}">
+            <DataGrid Grid.Column="1" x:Name="dgLoadMappingTable" HorizontalAlignment="Center"  VerticalAlignment="Center" ItemsSource="{Binding}">
             </DataGrid>
         </Grid>
         <Grid Grid.Row="4"  Height="50">
@@ -58,7 +68,7 @@
             <Label x:Name="lblTotalCount" Content="Unique Count : 0" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold" FontStyle="Italic" FontSize="22" FontFamily="Sitka Text" />
             <Label x:Name="lblSavedFilePath" Content="Saved File Path" HorizontalAlignment="Left" VerticalAlignment="Center"  FontSize="10" FontFamily="Sitka Text" Margin="230,6,0,7" Visibility="Hidden"/>
             <Button x:Name="btnSaveExp" Content="Save Exp" HorizontalAlignment="Center"  VerticalAlignment="Top" Width="100" Margin="490,0,171.6,0" Height="49" Click="BtnSaveExp_Click"/>
-            <Button x:Name="btnResetAllExpressions" Content="Save All Exp"  HorizontalAlignment="Center"  VerticalAlignment="Top" Width="100" Margin="618,0,40.6,0" Height="50" Click="btnResetAllExpressions_Click"/>
+            <Button x:Name="btnResetAllExpressions" Content="Save All Exp"  HorizontalAlignment="Center"  VerticalAlignment="Top" Width="100" Margin="618,0,40.6,0" Height="50" Click="btnSaveAllExpressions_Click"/>
         </Grid>
     </Grid>
 </Window>

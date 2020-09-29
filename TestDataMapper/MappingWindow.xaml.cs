@@ -106,11 +106,23 @@ namespace TestDataMapper
             l.FontSize = 18;
             l.FontWeight = FontWeights.Bold;
             l.FontFamily = new FontFamily("SimSun");
+            if (content == "ExpressionsList.json")
+                l.MouseDoubleClick += OpenExpressionManager;
+            else
             l.MouseDoubleClick += MyButton_DoubleClick; 
+
             //l.MouseDown
             return l;
 
         }
+
+        private void OpenExpressionManager(object sender, MouseButtonEventArgs e)
+        {
+            Label l = (Label)sender;
+            ExpressionManager expressionManager = new ExpressionManager(dataTable, ReadFileDataContent(txtboxMappingFolderPath.Text + "\\" + l.Content.ToString()));
+            expressionManager.Show();
+        }
+
         public void MyButton_DoubleClick(object sender, RoutedEventArgs e)
         {
             Label l = (Label)sender;

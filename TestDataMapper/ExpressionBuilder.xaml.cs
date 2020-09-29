@@ -91,7 +91,7 @@ namespace TestDataMapper
             return dt;
         }
 
-        private void btnResetAllExpressions_Click(object sender, RoutedEventArgs e)
+        private void btnSaveAllExpressions_Click(object sender, RoutedEventArgs e)
         {
             DataTable dt = DictToDT();
             DataTable_Processing dataTable_Processing = new DataTable_Processing();
@@ -99,6 +99,11 @@ namespace TestDataMapper
             ChildWindow childWindow = new ChildWindow();
             childWindow.saveFile(dataTable.TableName + ChildWindow.datetimeString, "ExpressionsList", "", jsonString);
             
+
+        }
+
+        private void BtnConcatStr_Click(object sender, RoutedEventArgs e)
+        {
 
         }
     }
