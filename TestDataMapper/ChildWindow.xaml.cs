@@ -23,7 +23,7 @@ namespace TestDataMapper
     public partial class ChildWindow : Window
     {
         DataTable originalTable;
-        static string datetimeString = DateTime.Now.ToString("yyyyMMdd_HHmmssfff_");
+        public static string datetimeString = DateTime.Now.ToString("yyyyMMdd_HHmmssfff_");
         public ChildWindow()
         {
             InitializeComponent();
@@ -67,6 +67,25 @@ namespace TestDataMapper
             using (StreamWriter sw = new StreamWriter((filePath+".json")))
             {
                 sw.Write(mappingDataJsonString);
+            }
+        }
+        public void saveFile(string folderName, string fileName, string mappingInfoFolder, string jsonString)
+        {
+            string dirPath = mappingInfoFolder != "" ? mappingInfoFolder + "\\" + folderName : folderName;
+
+            if (!Directory.Exists(dirPath))
+            {
+                Directory.CreateDirectory(dirPath);
+            }
+            string filePath = dirPath != "" ? dirPath + "\\" + fileName : fileName;
+
+            if (File.Exists(filePath + ".json"))
+            {
+                File.Delete(filePath + ".json");
+            }
+            using (StreamWriter sw = new StreamWriter((filePath + ".json")))
+            {
+                sw.Write(jsonString);
             }
         }
 

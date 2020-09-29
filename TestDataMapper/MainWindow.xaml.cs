@@ -337,5 +337,11 @@ namespace TestDataMapper
             }
 
         }
+
+        private void BtnExpressionBuilder_Click(object sender, RoutedEventArgs e)
+        {
+            ExpressionBuilder expressionBuilder = new ExpressionBuilder(currentProcessingTable);
+            expressionBuilder.Show();
+        }
     }
 }

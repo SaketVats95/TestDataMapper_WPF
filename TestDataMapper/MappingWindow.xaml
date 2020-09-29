@@ -31,19 +31,20 @@
             <Border Grid.Row="0" Background="#FFCCCC" Padding="11">
                 <!-- Replace this TextBlock with your upper body content. -->
                 <WrapPanel x:Name="wdPanelMapColList" >
-                    
+
                 </WrapPanel>
             </Border>
         </Grid>
         <!-- Footer Panel -->
-        <Grid Grid.Row="3" Background="#CCFFCC" Height="50">
+        <Grid Grid.Row="3" Background="#CCFFCC" Height="120">
             <!-- Replace this TextBlock with your footer content. -->
-            <Label x:Name="lblTotalCount" Content="Unique Count : 0" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold" FontStyle="Italic" FontSize="22" FontFamily="Sitka Text" />
+            <Label x:Name="lblTotalCount" Content="Unique Count : 0" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold" FontStyle="Italic" FontSize="22" FontFamily="Sitka Text" Margin="0,28,0,33" Width="170" Height="59" />
             <Label x:Name="lblSavedFilePath" Content="Saved File Path" HorizontalAlignment="Left" VerticalAlignment="Center"  FontSize="10" FontFamily="Sitka Text" Margin="230,6,0,7" Visibility="Hidden"/>
-            <Button x:Name="btnPreviewDT" Content="Preview Table"  HorizontalAlignment="Center"  VerticalAlignment="Top" Width="100" Height="50" Click="BtnPreviewDT_Click"  Margin="212,0,481.6,0"/>
-            <Button x:Name="btnSaveChanges" Content="Start Mapping" HorizontalAlignment="Center"  VerticalAlignment="Top" Width="100" Click="btnProcessMapping_Click"  Margin="490,0,171.6,0" Height="49"/>
-            <Button x:Name="btnResetChanges" Content="Reset Changes"  HorizontalAlignment="Center"  VerticalAlignment="Top" Width="100"  Margin="618,0,40.6,0" Height="50"/>
-            <Button x:Name="btnSaveDataTable" Content="Save Current Table" HorizontalAlignment="Center" Width="156" Click="btnSavetoExcelSheet_Click" FontWeight="Bold" FontSize="15" Margin="333,0,304.6,2"/>
+            <Button x:Name="btnPreviewDT" Content="Preview Table"  HorizontalAlignment="Center"  VerticalAlignment="Top" Width="100" Height="50" Click="BtnPreviewDT_Click"  Margin="230,1,463.6,-1"/>
+            <Button x:Name="btnSaveChanges" Content="Start Mapping" HorizontalAlignment="Center"  VerticalAlignment="Top" Width="100" Click="btnProcessMapping_Click"  Margin="545,0,148.6,0" Height="49"/>
+            <Button x:Name="btnResetChanges" Content="Reset Changes"  HorizontalAlignment="Center"  VerticalAlignment="Top" Width="100"  Margin="667,-1,26.6,0" Height="50"/>
+            <Button x:Name="btnSaveDataTable" Content="Save Current Table" HorizontalAlignment="Center" Width="156" Click="btnSavetoExcelSheet_Click" FontWeight="Bold" FontSize="15" Margin="358,1,279.6,69"/>
+            <Button x:Name="btnColNameMapping" Content="ColumnN Mapping" HorizontalAlignment="Center" Width="156" Height="50"  FontWeight="Bold" FontSize="15" Margin="358,60,279.6,10" Click="BtnColNameMapping_Click"/>
 
         </Grid>
     </Grid>

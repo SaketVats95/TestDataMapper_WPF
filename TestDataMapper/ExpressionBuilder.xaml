@@ -1,0 +1,64 @@
+﻿<Window x:Class="TestDataMapper.ExpressionBuilder"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TestDataMapper"
+        mc:Ignorable="d"
+        Title="ExpressionBuilder" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <!-- Header Panel -->
+        <Border Grid.Row="0" Background="#CCCCCC" Padding="11">
+            <!-- Replace this TextBlock with your header content. -->
+            <Label x:Name="lblColumnName" Content="Expression Builder" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" FontStyle="Italic" FontSize="22" FontFamily="Sitka Text" />
+        </Border>
+        <Grid Grid.Row="1" Background="LightBlue" >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Label Grid.Column="0" Grid.Row="0" x:Name="lblNewColumnName" Content="New Col Name" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" FontStyle="Italic" FontSize="22" FontFamily="Sitka Text" />
+            <Label Grid.Column="1" Grid.Row="0" x:Name="lblExpression" Content="Expression" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" FontStyle="Italic" FontSize="22" FontFamily="Sitka Text" />
+
+            <TextBox Grid.Column="0" Grid.Row="1" x:Name="txtboxColumnName"  Margin="0,0,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+
+            <TextBox Grid.Column="1" Grid.Row="1" x:Name="txtboxExpression"  Margin="50,0,0,0" Text ="" TextWrapping="Wrap" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+        </Grid>
+
+        <!-- Body Panel -->
+        
+            <WrapPanel x:Name="wpPanelColumnNames" Grid.Row="2"  Background="#FFCCCC">
+                <!-- Replace this TextBlock with your upper body content. -->
+            <Label x:Name="lblColume" Content="Columns:" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" FontStyle="Italic" FontSize="22" FontFamily="Sitka Text" />
+
+        </WrapPanel>
+       
+
+        <!-- Footer Panel -->
+        <Grid Grid.Row="3" Background="#CCFFCC">
+            <!-- Replace this TextBlock with your footer content. -->
+            <DataGrid x:Name="dgLoadMappingTable" HorizontalAlignment="Center"  VerticalAlignment="Center" ItemsSource="{Binding}">
+            </DataGrid>
+        </Grid>
+        <Grid Grid.Row="4"  Height="50">
+            <!-- Replace this TextBlock with your footer content. -->
+            <Label x:Name="lblTotalCount" Content="Unique Count : 0" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold" FontStyle="Italic" FontSize="22" FontFamily="Sitka Text" />
+            <Label x:Name="lblSavedFilePath" Content="Saved File Path" HorizontalAlignment="Left" VerticalAlignment="Center"  FontSize="10" FontFamily="Sitka Text" Margin="230,6,0,7" Visibility="Hidden"/>
+            <Button x:Name="btnSaveExp" Content="Save Exp" HorizontalAlignment="Center"  VerticalAlignment="Top" Width="100" Margin="490,0,171.6,0" Height="49" Click="BtnSaveExp_Click"/>
+            <Button x:Name="btnResetAllExpressions" Content="Save All Exp"  HorizontalAlignment="Center"  VerticalAlignment="Top" Width="100" Margin="618,0,40.6,0" Height="50" Click="btnResetAllExpressions_Click"/>
+        </Grid>
+    </Grid>
+</Window>

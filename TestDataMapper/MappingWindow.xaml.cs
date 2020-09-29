@@ -167,5 +167,27 @@ namespace TestDataMapper
             DataTablePreview dataTablePreview = new DataTablePreview(dataTable);
             dataTablePreview.Show();
         }
+
+        private void BtnColNameMapping_Click(object sender, RoutedEventArgs e)
+        {
+            backupTable = dataTable.Copy();
+            string fileName = "ColumnNameList.json";
+                Dictionary<string, string> mappingDataDic = ReadMappingFile(txtboxMappingFolderPath.Text + "\\" +fileName);
+                if (mappingDataDic.Count > 0)
+                {
+                foreach (KeyValuePair<string,string> keyValuePair in mappingDataDic)
+                {
+                    try
+                    {
+                        dataTable.Columns[keyValuePair.Key].ColumnName = keyValuePair.Value;
+                     }
+                    catch(Exception ex)
+                    {
+
+                    }
+                }
+                }
+            
+        }
     }
 }
