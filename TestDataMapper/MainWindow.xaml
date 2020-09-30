@@ -23,13 +23,13 @@
             <Menu DockPanel.Dock="Top">
                 <MenuItem Header="Processing Option">
                     <MenuItem Header="Create Mapping">
-                        <MenuItem Header="Column Value" IsCheckable="False" Click="MenuItem_Click" />
-                        <MenuItem Header="Column Name" IsCheckable="False"/>
-                        <MenuItem Header="Expression Builder" IsCheckable="False"/>
+                        <MenuItem Header="Column Value" IsCheckable="False" Click="BtnProcessCol_Click" />
+                        <MenuItem Header="Column Name" IsCheckable="False" Click="BtnProcessColName_Click"/>
+                        <MenuItem Header="Expression Builder" IsCheckable="False" Click="BtnExpressionBuilder_Click"/>
                     </MenuItem>
-                    <MenuItem Header="Execute Mapping">
-                    <MenuItem Header="Current Folder" IsCheckable="True" Click="MenuItem_Click" />
-                    <MenuItem Header="Select Folder" IsCheckable="False"/>
+                    <MenuItem Header="Execute Mapping" >
+                    <MenuItem Header="Current Folder" IsCheckable="True" Click="BtnExecuteCurrentFolder_Click" />
+                    <MenuItem Header="Select Folder" IsCheckable="False" Click="BtnExecuteMapping_Click"/>
                 </MenuItem>
                 <MenuItem Header="Sub Items"/>
 
@@ -46,24 +46,14 @@
             <!-- Replace this TextBlock with your header content. -->
             <Label x:Name="lblColumnName" Content="Main Window" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" FontStyle="Italic" FontSize="20" FontFamily="Sitka Text" />
         </Border>
-        <Grid Grid.Row="2" Background="#CCCCFF" >
-            <Label x:Name="lblTestFile" Content="Select Test File" HorizontalAlignment="Left" Margin="24,21,0,0" VerticalAlignment="Top"/>
-            <TextBox x:Name="txtboxTestFileName" HorizontalAlignment="Left" Height="23" Margin="127,21,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="400"/>
-                <Button x:Name="btnTestFile" Content="Select" HorizontalAlignment="Left" Margin="578,25,0,0" VerticalAlignment="Top" Width="75" Click="BtnTestFile_Click"/>
-        </Grid>
-        <WrapPanel Grid.Row="3" Background="#FF60A3BC">
-            <!-- Replace this TextBlock with your footer content. -->
+        <WrapPanel Grid.Row="2" Background="#CCCCFF" >
+            <Label x:Name="lblTestFile" VerticalContentAlignment="Center" Content="Select Test File"  HorizontalAlignment="Left" Margin="10,10,10,10" Height="50" VerticalAlignment="Top"/>
+            <TextBox x:Name="txtboxTestFileName" HorizontalAlignment="Left" Height="50" Margin="10,10,10,10" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="400"/>
+            <Button x:Name="btnTestFile" Content="Select" HorizontalAlignment="Left" Margin="10,10,10,10" Width="75" Click="BtnTestFile_Click"/>
 
             <Button x:Name="btnLoadExcelSheet" Content="Load Table" Background="YellowGreen" Margin="10,10,10,10" Width="100" Height="50" HorizontalAlignment="Left"  VerticalAlignment="Top"  Click="btnLoadExcelSheet_Click" />
-            <Button x:Name="btnProcessDC" Content="ColValue Mapping" Background="YellowGreen" Margin="10,10,10,10" Width="100" Height="50" HorizontalAlignment="Left"  VerticalAlignment="Top"  Click="BtnProcessCol_Click" />
-            <Button x:Name="btnPreviewDT" Content="Preview Table"  Background="YellowGreen" Margin="10,10,10,10" Width="100" Height="50" HorizontalAlignment="Left"  VerticalAlignment="Top" Click="BtnPreviewDT_Click"  />
-            <Button x:Name="btnExecuteMapping" Content="Execute Mapping"  Background="YellowGreen" Margin="10,10,10,10" Width="100" Height="50" HorizontalAlignment="Left"  VerticalAlignment="Top" Click="BtnExecuteMapping_Click"   />
-            <Button x:Name="btnColumnNameMapping" Content="ColName Mapper" Background="YellowGreen" Margin="10,10,10,10" Width="100" Height="50" HorizontalAlignment="Left"  VerticalAlignment="Top"  Click="BtnProcessColName_Click" />
-            <Button x:Name="btnExpressionBuilder" Content="ExpBuilder" Background="YellowGreen" Margin="10,10,10,10" Width="100" Height="50" HorizontalAlignment="Left"  VerticalAlignment="Top" Click="BtnExpressionBuilder_Click"   />
-
-            <!--<Button x:Name="btnclick" Content="Click Me"  Background="YellowGreen" Margin="10,10,20,10" Width="100" Height="50" HorizontalAlignment="Left"  VerticalAlignment="Top"  Click="Button_Click" Visibility="Hidden"/>-->
-
         </WrapPanel>
+       
         <!-- Footer Panel -->
         <Grid Grid.Row="4" Background="#CCFFCC">
             <Label x:Name="lblSheetNames" Content="Sheet Name" HorizontalAlignment="Left" Width="150" VerticalAlignment="Top" FontWeight="Bold" FontStyle="Italic" FontSize="20" FontFamily="Sitka Text" />

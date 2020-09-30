@@ -69,6 +69,7 @@ namespace TestDataMapper
         {
             // To Copy distinct values from col1 to a different datatable
             DataTable uniqueCols = dt.DefaultView.ToTable(true, columnName);
+        //    uniqueCols.Columns[columnName].DataType.="string" ;
             return uniqueCols.AsEnumerable()
                             .Select(r => r.Field<string>(columnName))
                             .ToList();
