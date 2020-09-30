@@ -38,6 +38,21 @@ namespace TestDataMapper
             dataTable = dt;
 
         }
+        public MappingWindow(DataTable dt,string folderName)
+        {
+            InitializeComponent();
+            dataTable = dt;
+            txtboxMappingFolderPath.Text = folderName;
+            if (txtboxMappingFolderPath.Text != "")
+            {
+                List<string> filesPath = GetAllFiles(txtboxMappingFolderPath.Text);
+                foreach (string f in filesPath)
+                {
+                    FileInfo file = new FileInfo(f);
+                    wdPanelMapColList.Children.Add(addLabelWithClickEvent(file.Name));
+                }
+            }
+        }
         public List<string> GetAllFiles(string dirPath)
         {
             List<string> files = new List<string>();
@@ -52,11 +67,28 @@ namespace TestDataMapper
             allfiles = files;
             return files;
         }
+        public void DeleteAllChildElement(WrapPanel st)
+        {
+            UIElementCollection childElements = st.Children;
+            int count = childElements.Count;
+            for (int i = 0; i < count; i++)
+            {
+                //if (child.GetType() == typeof(RadioButton))
+                //{
+                //    RadioButton rb = (RadioButton)child;
+                //    if ((bool)rb.IsChecked)
+                //    {
+                //        
+                //    }
+                //}
+                st.Children.RemoveAt(0);
+            }
 
+        }
         private void btnMappingFolder_Click(object sender, RoutedEventArgs e)
         {
-           
-            var ookiiDialog = new VistaFolderBrowserDialog();
+            DeleteAllChildElement(wdPanelMapColList);
+             var ookiiDialog = new VistaFolderBrowserDialog();
             if (ookiiDialog.ShowDialog() == true)
             {
                 //MessageBox.Show(ookiiDialog.SelectedPath);

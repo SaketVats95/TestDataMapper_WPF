@@ -84,6 +84,12 @@ namespace TestDataMapper
                 }
             }
         }
+
+        private void BtnPreviewDT_Click(object sender, RoutedEventArgs e)
+        {
+            DataTablePreview dataTablePreview = new DataTablePreview(dt_OriginalDataTable);
+            dataTablePreview.Show();
+        }
     }
    
 }

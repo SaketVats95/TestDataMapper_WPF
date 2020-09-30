@@ -85,13 +85,13 @@ namespace TestDataMapper
             string extension = fi.Extension;
             string sheetName = GetSelectedRadioButton(stPanelSheetNames);
            DataTable dt = ReadExcelSheet(fileName, extension,sheetName);
-            //DataTable testTable = ChangeColumnName(dt);
+            DataTable testTable = ChangeColumnType(dt);
             if (!object.ReferenceEquals(currentProcessingTable, null))
             {
                 currentProcessingTable.Dispose();
             }
-            //currentProcessingTable = testTable;
-            currentProcessingTable = dt;
+            currentProcessingTable = testTable;
+           // currentProcessingTable = dt;
             dgLoadTable.DataContext = currentProcessingTable;
             DeleteAllChildElement(stPanelColumnsName);
             GenetateRadioButtonList(GetAllColumnNames(currentProcessingTable),stPanelColumnsName);
@@ -107,19 +107,18 @@ namespace TestDataMapper
             return allColNames;
         }
 
-        private DataTable ChangeColumnName(DataTable dt)
+        private DataTable ChangeColumnType(DataTable dt)
         {
             DataTable dataTable = new DataTable(dt.TableName);
-            DataRow firstRow = dt.Rows[0];
-            int count = 1;
+            //DataRow firstRow = dt.Rows[0];
+            //int count = 1;
             foreach (DataColumn col in dt.Columns)
             {
-                string colName = firstRow[col.ColumnName].ToString();
-                dataTable.Columns.Add(colName!=""? colName : "C" + count , typeof(string));
-                count++;
+              dataTable.Columns.Add(col.ColumnName, typeof(string));
+               // count++;
             }
 
-            for (int i = 1; i < dt.Rows.Count; i++)
+            for (int i = 0; i < dt.Rows.Count; i++)
             {
                 DataRow dr = dt.Rows[i];
                 DataRow row = dataTable.NewRow();
@@ -278,11 +277,13 @@ namespace TestDataMapper
         private void BtnProcessCol_Click(object sender, RoutedEventArgs e)
         {
             string seletedCol = GetSelectedRadioButton(stPanelColumnsName);
-            List<string> uniqueValue = new List<string>();
+          List<string> uniqueValue = new List<string>();
+          
             if (seletedCol != "")
             {
                 DataTable_Processing dataTable_Processing = new DataTable_Processing();
                 uniqueValue = dataTable_Processing.GetColUniqueValues(currentProcessingTable, seletedCol);
+           
                 if (uniqueValue.Count > 0)
                 {
                     DataTable dt = CreateColumnMapperTable(uniqueValue, seletedCol);
@@ -332,6 +333,7 @@ namespace TestDataMapper
         }
         public DataTable CreateColumnMapperTable(List<string> uniqueColumnValues, string columnName)
         {
+
             DataTable dt = new DataTable(currentProcessingTable.TableName+"|"+columnName+"|Column");
             dt.Columns.Add("OriginalValue",typeof(string));
             dt.Columns.Add("MappingValue", typeof(string));
@@ -380,9 +382,13 @@ namespace TestDataMapper
             expressionBuilder.Show();
         }
 
-        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        private void BtnExecuteCurrentFolder_Click(object sender, RoutedEventArgs e)
         {
-
+            string mappingInfoFolder = "";
+            string folderName = currentProcessingTable.TableName + ChildWindow.datetimeString;
+            string dirPath = mappingInfoFolder != "" ? mappingInfoFolder + "\\" + folderName : folderName;
+            MappingWindow map = new MappingWindow(currentProcessingTable, dirPath);
+            map.Show();
         }
     }
 }

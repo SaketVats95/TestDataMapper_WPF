@@ -36,6 +36,7 @@
             <Button x:Name="btnApplyExpressions" Content="Apply Expressions" HorizontalAlignment="Center" Width="100" Click="btnApplyExpression_Click" Margin="506,0,187.6,1"/>
             <Button x:Name="btnResetChanges" Content="Reset Changes"  HorizontalAlignment="Center" Width="100" Click="btnBackToPreviousState_Click" Margin="636,0,57.6,0"/>
             <Button x:Name="btnSaveDataTable" Content="Save Current Table" HorizontalAlignment="Center" Width="156" Click="btnSavetoExcelSheet_Click" FontWeight="Bold" FontSize="15" Margin="291,2,346.6,0"/>
+            <Button x:Name="btnPreviewDT" Content="Preview Table"  Background="YellowGreen" Margin="195,10,0,-10" Width="100" Height="50" HorizontalAlignment="Left"  VerticalAlignment="Top" Click="BtnPreviewDT_Click"  />
 
         </Grid>
     </Grid>
