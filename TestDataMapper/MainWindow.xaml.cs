@@ -39,20 +39,41 @@ namespace TestDataMapper
         {
             string conn = string.Empty;
             DataTable dtexcel = new DataTable(sheetName);
-            if (fileExt.CompareTo(".xls") == 0)
-                conn = @"provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + fileName + ";Extended Properties='Excel 8.0;HRD=Yes;IMEX=1';"; //for below excel 2007  
-            else
-                conn = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + fileName + ";Extended Properties='Excel 12.0;HDR=Yes';"; //for above excel 2007  
-            using (OleDbConnection con = new OleDbConnection(conn))
+            if (fileExt.CompareTo(".csv") == 0)
             {
-                try
+
+                var connString = string.Format(
+                    @"Provider=Microsoft.Jet.OleDb.4.0; Data Source={0};Extended Properties=""Text;HDR=YES;FMT=Delimited""",
+                    System.IO.Path.GetDirectoryName(fileName)
+                );
+                using (var connection = new OleDbConnection(connString))
                 {
-                    OleDbDataAdapter oleAdpt = new OleDbDataAdapter("select * from ["+sheetName+"]", con); //here we read data from sheet1  
-                    oleAdpt.Fill(dtexcel); //fill excel data into dataTable  
+                    connection.Open();
+                    var query = "SELECT * FROM [" + System.IO.Path.GetFileName(fileName) + "]";
+                    using (var adapter = new OleDbDataAdapter(query, connection))
+                    {
+                        // var ds = new DataSet("CSV File");
+                        adapter.Fill(dtexcel);
+                    }
                 }
-                catch( Exception ex)
+            }
+            else
+            {
+                if (fileExt.CompareTo(".xls") == 0)
+                    conn = @"provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + fileName + ";Extended Properties='Excel 8.0;HRD=Yes;IMEX=1';"; //for below excel 2007  
+                else
+                    conn = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + fileName + ";Extended Properties='Excel 12.0;HDR=Yes';"; //for above excel 2007  
+                using (OleDbConnection con = new OleDbConnection(conn))
                 {
-                    
+                    try
+                    {
+                        OleDbDataAdapter oleAdpt = new OleDbDataAdapter("select * from [" + sheetName + "]", con); //here we read data from sheet1  
+                        oleAdpt.Fill(dtexcel); //fill excel data into dataTable  
+                    }
+                    catch (Exception ex)
+                    {
+
+                    }
                 }
             }
             return dtexcel;
@@ -150,32 +171,47 @@ namespace TestDataMapper
             DataTable dataTable = new DataTable("SchemaTable");
             FileInfo f = new FileInfo(fileName);
             string fileExt = f.Extension;
-            if (fileExt.CompareTo(".xls") == 0)
-                conn = @"provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + fileName + ";Extended Properties='Excel 8.0;HRD=Yes;IMEX=1';"; //for below excel 2007  
-            else
-                conn = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + fileName + ";Extended Properties='Excel 12.0;HDR=NO';"; //for above excel 2007  
-            using (OleDbConnection con = new OleDbConnection(conn))
+
+            if (fileExt.CompareTo(".csv") == 0)
             {
-                try
+                if (File.Exists(fileName))
                 {
-                    con.Open();
-                    dataTable = con.GetSchema("Tables");  
+                    allSheetName.Add(f.Name);
+
                 }
-                catch (Exception ex)
-                {
-                }
-                con.Close();
-            }
-           
-            // skip those that do not end correctly
-            foreach (DataRow row in dataTable.Rows)
-            {
-                string sheetName = row["TABLE_NAME"].ToString();
-                if (!sheetName.EndsWith("$") && !sheetName.EndsWith("$'"))
-                    continue;
-                allSheetName.Add(row["TABLE_NAME"].ToString());
+
             }
 
+            else
+            {
+                if (fileExt.CompareTo(".xls") == 0)
+                    conn = @"provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + fileName + ";Extended Properties='Excel 8.0;HRD=Yes;IMEX=1';"; //for below excel 2007  
+                else
+                    conn = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + fileName + ";Extended Properties='Excel 12.0;HDR=NO';"; //for above excel 2007  
+                using (OleDbConnection con = new OleDbConnection(conn))
+                {
+                    try
+                    {
+                        con.Open();
+                        dataTable = con.GetSchema("Tables");
+                    }
+                    catch (Exception ex)
+                    {
+                    }
+                    con.Close();
+                }
+
+
+
+                // skip those that do not end correctly
+                foreach (DataRow row in dataTable.Rows)
+                {
+                    string sheetName = row["TABLE_NAME"].ToString();
+                    if (!sheetName.EndsWith("$") && !sheetName.EndsWith("$'"))
+                        continue;
+                    allSheetName.Add(row["TABLE_NAME"].ToString());
+                }
+            }
         }
 
         public void GenetateRadioButtonList(List<string> names, StackPanel st)
@@ -206,7 +242,7 @@ namespace TestDataMapper
         {
             // Create OpenFileDialog
             OpenFileDialog openFileDlg = new OpenFileDialog();
-            openFileDlg.Filter = "Excel Files (*.xlsx)|*.xlsx|(*.xlsb)|*.xlsb";
+         //   openFileDlg.Filter = "Excel Files (*.xlsx)|*.xlsx|(*.xlsb)|*.xlsb";
             // Launch OpenFileDialog by calling ShowDialog method
             Nullable<bool> result = openFileDlg.ShowDialog();
             // Get the selected file name and display in a TextBox.
