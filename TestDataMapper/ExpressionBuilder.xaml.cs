@@ -24,6 +24,7 @@ namespace TestDataMapper
         Dictionary<string,string> allExpressions = new Dictionary<string, string>();
         DataTable dataTable = new DataTable();
         DataTable backupTable;
+        public ExpressionType enm_Exp = ExpressionType.String;
 
         public ExpressionBuilder()
         {
@@ -47,7 +48,12 @@ namespace TestDataMapper
         {
             Label colLabel = (Label)sender;
             string colName = colLabel.Content.ToString();
+            if (enm_Exp == ExpressionType.Airthmatic)
+                txtboxExpression.Text = String.Format(" {0} CONVERT(TRIM([{1}]),'System.Int32') ", txtboxExpression.Text, colName);
+            else if (enm_Exp == ExpressionType.Split)
+                txtboxExpression.Text = String.Format(" {0} SUBSTRING([{1}],1,4) ", txtboxExpression.Text, colName);
             txtboxExpression.Text = String.Format(" {0} [{1}] ", txtboxExpression.Text, colName);
+
         }
         public Label addLabelWithClickEvent(string content)
         {
@@ -69,12 +75,19 @@ namespace TestDataMapper
 
         private void BtnSaveExp_Click(object sender, RoutedEventArgs e)
         {
-            if (txtboxColumnName.Text != "" && txtboxExpression.Text != "")
+            if (txtboxExpression.Text == "" || txtboxColumnName.Text == "")
+                MessageBox.Show("Either Column Name or Expression is Missing!!! Please Try Again", "Warning", MessageBoxButton.OK, MessageBoxImage.Error);
+            else
             {
-                if(!allExpressions.Keys.Contains(txtboxExpression.Text))
-                allExpressions.Add(txtboxColumnName.Text, txtboxExpression.Text);
+                if (txtboxColumnName.Text != "" && txtboxExpression.Text != "")
+                {
+                    if (!allExpressions.Keys.Contains(txtboxExpression.Text))
+                        allExpressions.Add(txtboxColumnName.Text, txtboxExpression.Text);
+                }
+
+                txtboxExpression.Text = ""; txtboxColumnName.Text = "";
+                enm_Exp = ExpressionType.String;
             }
-            txtboxColumnName.Text = ""; txtboxExpression.Text = "";
         }
         public DataTable DictToDT()
         {
@@ -104,7 +117,24 @@ namespace TestDataMapper
 
         private void BtnConcatStr_Click(object sender, RoutedEventArgs e)
         {
+            enm_Exp = ExpressionType.String;
 
         }
+
+        private void BtnAirthmaticOp_Click(object sender, RoutedEventArgs e)
+        {
+            enm_Exp = ExpressionType.Airthmatic;
+        }
+
+        private void BtnSplit_Click(object sender, RoutedEventArgs e)
+        {
+            enm_Exp = ExpressionType.Split;
+        }
+    }
+    public enum ExpressionType
+    {
+        Airthmatic,
+        String,
+        Split
     }
 }

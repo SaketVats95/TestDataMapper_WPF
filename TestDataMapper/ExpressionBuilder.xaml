@@ -54,9 +54,9 @@
                 <ColumnDefinition Width="3*" />
             </Grid.ColumnDefinitions>
             <WrapPanel Grid.Column="0">
-                <Button x:Name="btnConcatenate" Content="Concat" FontWeight="DemiBold" Width="100"  Margin="5,5,5,5" Height="30" Click="BtnConcatStr_Click"/>
-                <Button x:Name="btnSplit" Content="Split" FontWeight="DemiBold" Width="100"  Margin="5,5,5,5" Height="30" />
-
+                <Button x:Name="btnStringConcat" Content="Concat String" FontWeight="DemiBold" Width="100"  Margin="5,5,5,5" Height="30" Click="BtnConcatStr_Click"/>
+                <Button x:Name="btnSplit" Content="Split" FontWeight="DemiBold" Width="100"  Margin="5,5,5,5" Height="30" Click="BtnSplit_Click" />
+                <Button x:Name="btnAirthmaticOp" Content="Arithmatic OPP" FontWeight="DemiBold" Width="100"  Margin="5,5,5,5" Height="30" Click="BtnAirthmaticOp_Click" />
 
             </WrapPanel>
             <!-- Replace this TextBlock with your footer content. -->

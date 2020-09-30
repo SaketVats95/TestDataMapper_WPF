@@ -31,6 +31,16 @@ namespace TestDataMapper
         //    { }
 
         //}
+        public void AddNewColumnAirthmenticOp(ref DataTable dt, string columnName, string expression)
+        {
+            DataColumn newColumn = new DataColumn(columnName);
+            
+            newColumn.DataType = System.Type.GetType("System.String");
+            newColumn.Expression = expression;
+
+            // Add columns to DataTable.
+            dt.Columns.Add(newColumn);
+        }
         public void AddNewColumn(ref DataTable dt, string columnName, string expression)
         {
             DataColumn newColumn = new DataColumn(columnName);
