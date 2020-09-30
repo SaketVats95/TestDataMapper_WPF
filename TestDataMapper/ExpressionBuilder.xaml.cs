@@ -52,7 +52,7 @@ namespace TestDataMapper
                 txtboxExpression.Text = String.Format(" {0} CONVERT(TRIM([{1}]),'System.Int32') ", txtboxExpression.Text, colName);
             else if (enm_Exp == ExpressionType.Split)
                 txtboxExpression.Text = String.Format(" {0} SUBSTRING([{1}],1,4) ", txtboxExpression.Text, colName);
-            txtboxExpression.Text = String.Format(" {0} [{1}] ", txtboxExpression.Text, colName);
+            else txtboxExpression.Text = String.Format(" {0} [{1}] ", txtboxExpression.Text, colName);
 
         }
         public Label addLabelWithClickEvent(string content)
