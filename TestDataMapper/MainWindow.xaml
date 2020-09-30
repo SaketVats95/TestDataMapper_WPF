@@ -23,13 +23,13 @@
             <Menu DockPanel.Dock="Top">
                 <MenuItem Header="Processing Option">
                     <MenuItem Header="Create Mapping">
-                        <MenuItem Header="Column Value" IsCheckable="False" Click="BtnProcessCol_Click" />
-                        <MenuItem Header="Column Name" IsCheckable="False" Click="BtnProcessColName_Click"/>
-                        <MenuItem Header="Expression Builder" IsCheckable="False" Click="BtnExpressionBuilder_Click"/>
+                        <MenuItem x:Name="mItemColumnValue" Header="Column Value" IsCheckable="False" Click="BtnProcessCol_Click" IsEnabled="False"/>
+                        <MenuItem x:Name="mIemColumnName" Header="Column Name" IsCheckable="False" Click="BtnProcessColName_Click" IsEnabled="False"/>
+                        <MenuItem x:Name="mIemExpressionBuilder" Header="Expression Builder" IsCheckable="False" Click="BtnExpressionBuilder_Click" IsEnabled="False"/>
                     </MenuItem>
                     <MenuItem Header="Execute Mapping" >
-                    <MenuItem Header="Current Folder" IsCheckable="True" Click="BtnExecuteCurrentFolder_Click" />
-                    <MenuItem Header="Select Folder" IsCheckable="False" Click="BtnExecuteMapping_Click"/>
+                    <MenuItem x:Name="mIemExecuteCurrentDir" Header="Current Folder" IsCheckable="True" Click="BtnExecuteCurrentFolder_Click" IsEnabled="False"/>
+                        <MenuItem x:Name="mIemSelectFolder" Header="Select Folder" IsCheckable="False" Click="BtnExecuteMapping_Click" IsEnabled="False"/>
                 </MenuItem>
                 <MenuItem Header="Sub Items"/>
 

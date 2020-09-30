@@ -272,6 +272,11 @@ namespace TestDataMapper
         private void btnLoadExcelSheet_Click(object sender, RoutedEventArgs e)
         {
             LoadExcelSheet();
+            mItemColumnValue.IsEnabled = true;
+            mIemColumnName.IsEnabled = true;
+            mIemExpressionBuilder.IsEnabled = true;
+            mIemSelectFolder.IsEnabled = true;
+
         }
 
         private void BtnProcessCol_Click(object sender, RoutedEventArgs e)
@@ -289,6 +294,7 @@ namespace TestDataMapper
                     DataTable dt = CreateColumnMapperTable(uniqueValue, seletedCol);
                     ChildWindow chldWindow = new ChildWindow(dt);
                     chldWindow.Show();
+                    mIemExecuteCurrentDir.IsEnabled = true;
                 }
             }
             
@@ -380,6 +386,7 @@ namespace TestDataMapper
         {
             ExpressionBuilder expressionBuilder = new ExpressionBuilder(currentProcessingTable);
             expressionBuilder.Show();
+            mIemExecuteCurrentDir.IsEnabled = true;
         }
 
         private void BtnExecuteCurrentFolder_Click(object sender, RoutedEventArgs e)
