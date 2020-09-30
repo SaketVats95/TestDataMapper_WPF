@@ -92,12 +92,12 @@ namespace TestDataMapper
                 foreach (KeyValuePair<string, string> keyValue in dict)
                 {
                     if (count == 0)
-                        if (keyValue.Value == null)
-                            key = "";
+                        //if (keyValue.Value == null)
+                        //    key = "";
+                        //else
+                            key = keyValue.Value ?? "";// keyValue.Value;
                         else
-                            key = keyValue.Value;// keyValue.Value;
-                        else
-                            value = keyValue.Value;
+                            value = keyValue.Value ?? "";
                     count++;
                 }
                 try
