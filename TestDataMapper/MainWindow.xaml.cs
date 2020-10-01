@@ -78,6 +78,7 @@ namespace TestDataMapper
             }
             return dtexcel;
         }
+       
         public void LoadExcelSheet()
         {
             string fileName = txtboxTestFileName.Text;
@@ -276,6 +277,20 @@ namespace TestDataMapper
             mIemColumnName.IsEnabled = true;
             mIemExpressionBuilder.IsEnabled = true;
             mIemSelectFolder.IsEnabled = true;
+
+        }
+        private void btnExecuteServerRequest_Click(object sender, RoutedEventArgs e)
+        {
+            DataSet ds = new DataSet();
+            ds.Tables.Add(currentProcessingTable);
+            string filename = "..\\DumpFiles\\XPathMapper.xlsx";
+            string fileExt = ".xlsx";
+          DataTable datatableMapper=  ReadExcelSheet(filename, fileExt, "Sheet2");
+            datatableMapper.TableName = "MapperTable";
+            ds.Tables.Add(datatableMapper);
+            DCTAsyncReuestHandling.RequestAddResponse rq = new DCTAsyncReuestHandling.RequestAddResponse(ds, currentProcessingTable.TableName, datatableMapper.TableName);
+            rq.ProcessAllInputData();
+            
 
         }
 

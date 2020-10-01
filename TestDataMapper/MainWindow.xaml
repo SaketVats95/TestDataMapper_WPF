@@ -31,9 +31,8 @@
                     <MenuItem x:Name="mIemExecuteCurrentDir" Header="Current Folder" IsCheckable="True" Click="BtnExecuteCurrentFolder_Click" IsEnabled="False"/>
                         <MenuItem x:Name="mIemSelectFolder" Header="Select Folder" IsCheckable="False" Click="BtnExecuteMapping_Click" IsEnabled="False"/>
                 </MenuItem>
-                <MenuItem Header="Sub Items"/>
-
-
+                    <MenuItem Header="Server Request" x:Name="mItemServerRequest" IsCheckable="True"  IsEnabled="True" Click="btnExecuteServerRequest_Click" />
+                    
                 </MenuItem>
             </Menu>
             <StackPanel></StackPanel>

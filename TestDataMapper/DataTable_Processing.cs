@@ -46,9 +46,12 @@ namespace TestDataMapper
             DataColumn newColumn = new DataColumn(columnName);
             newColumn.DataType = System.Type.GetType("System.String");
             newColumn.Expression = expression;
-
-            // Add columns to DataTable.
-            dt.Columns.Add(newColumn);
+            try
+            {
+                // Add columns to DataTable.
+                dt.Columns.Add(newColumn);
+            }
+            catch(Exception ex) { }
         }
         public DataTable ConvertJsonStrToDT(string jsonStr)
         {
