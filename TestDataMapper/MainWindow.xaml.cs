@@ -408,7 +408,7 @@ namespace TestDataMapper
         {
             string mappingInfoFolder = "";
             string folderName = currentProcessingTable.TableName + ChildWindow.datetimeString;
-            string dirPath = mappingInfoFolder != "" ? mappingInfoFolder + "\\" + folderName : folderName;
+            string dirPath = mappingInfoFolder != "" ? mappingInfoFolder + "//" + folderName : folderName;
             MappingWindow map = new MappingWindow(currentProcessingTable, dirPath);
             map.Show();
         }

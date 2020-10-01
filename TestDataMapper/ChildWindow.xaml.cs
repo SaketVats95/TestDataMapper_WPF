@@ -52,13 +52,13 @@ namespace TestDataMapper
             string folderName = allInfo.Split('|')[0]+datetimeString;
             string fileName = allInfo.Split('|')[1];
             string mappingInfoFolder = "";
-            string dirPath =mappingInfoFolder!=""? mappingInfoFolder + "\\" + folderName:folderName;
+            string dirPath =mappingInfoFolder!=""? mappingInfoFolder + "//" + folderName:folderName;
 
             if (!Directory.Exists(dirPath))
             {
                 Directory.CreateDirectory(dirPath);
             }
-            string filePath = dirPath != ""? dirPath+"\\"+fileName : fileName;
+            string filePath = dirPath != ""? dirPath+"//"+fileName : fileName;
             
             if (File.Exists(filePath+ ".json"))
             {
@@ -71,13 +71,13 @@ namespace TestDataMapper
         }
         public void saveFile(string folderName, string fileName, string mappingInfoFolder, string jsonString)
         {
-            string dirPath = mappingInfoFolder != "" ? mappingInfoFolder + "\\" + folderName : folderName;
+            string dirPath = mappingInfoFolder != "" ? mappingInfoFolder + "//" + folderName : folderName;
 
             if (!Directory.Exists(dirPath))
             {
                 Directory.CreateDirectory(dirPath);
             }
-            string filePath = dirPath != "" ? dirPath + "\\" + fileName : fileName;
+            string filePath = dirPath != "" ? dirPath + "//" + fileName : fileName;
 
             if (File.Exists(filePath + ".json"))
             {

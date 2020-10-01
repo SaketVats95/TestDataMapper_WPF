@@ -151,7 +151,7 @@ namespace TestDataMapper
         private void OpenExpressionManager(object sender, MouseButtonEventArgs e)
         {
             Label l = (Label)sender;
-            ExpressionManager expressionManager = new ExpressionManager(dataTable, ReadFileDataContent(txtboxMappingFolderPath.Text + "\\" + l.Content.ToString()));
+            ExpressionManager expressionManager = new ExpressionManager(dataTable, ReadFileDataContent(txtboxMappingFolderPath.Text + "//" + l.Content.ToString()));
             expressionManager.Show();
         }
 
@@ -159,7 +159,7 @@ namespace TestDataMapper
         {
             Label l = (Label)sender;
             //MessageBox.Show(l.Content.ToString());
-            string jsonData = ReadFileDataContent(txtboxMappingFolderPath.Text + "\\" + l.Content.ToString());
+            string jsonData = ReadFileDataContent(txtboxMappingFolderPath.Text + "//" + l.Content.ToString());
             if (jsonData != "")
             {
                 DataTable_Processing dataTable_Processing = new DataTable_Processing();
@@ -216,7 +216,7 @@ namespace TestDataMapper
         {
             backupTable = dataTable.Copy();
             string fileName = "ColumnNameList.json";
-                Dictionary<string, string> mappingDataDic = ReadMappingFile(txtboxMappingFolderPath.Text + "\\" +fileName);
+                Dictionary<string, string> mappingDataDic = ReadMappingFile(txtboxMappingFolderPath.Text + "//" +fileName);
                 if (mappingDataDic.Count > 0)
                 {
                 foreach (KeyValuePair<string,string> keyValuePair in mappingDataDic)
