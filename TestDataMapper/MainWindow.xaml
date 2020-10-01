@@ -9,8 +9,8 @@
         mc:Ignorable="d"
         xmlns:chartingToolkit="clr-namespace:System.Windows.Controls.DataVisualization.Charting;assembly=System.Windows.Controls.DataVisualization.Toolkit"
         Title="MainWindow">
-    
     <Grid>
+        <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
@@ -19,7 +19,7 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <DockPanel Grid.Row="0">
+        <DockPanel Grid.Row="0" LastChildFill="False">
             <Menu DockPanel.Dock="Top">
                 <MenuItem Header="Processing Option">
                     <MenuItem Header="Create Mapping">
@@ -28,11 +28,11 @@
                         <MenuItem x:Name="mIemExpressionBuilder" Header="Expression Builder" IsCheckable="False" Click="BtnExpressionBuilder_Click" IsEnabled="False"/>
                     </MenuItem>
                     <MenuItem Header="Execute Mapping" >
-                    <MenuItem x:Name="mIemExecuteCurrentDir" Header="Current Folder" IsCheckable="True" Click="BtnExecuteCurrentFolder_Click" IsEnabled="False"/>
+                        <MenuItem x:Name="mIemExecuteCurrentDir" Header="Current Folder" IsCheckable="True" Click="BtnExecuteCurrentFolder_Click" IsEnabled="False"/>
                         <MenuItem x:Name="mIemSelectFolder" Header="Select Folder" IsCheckable="False" Click="BtnExecuteMapping_Click" IsEnabled="False"/>
-                </MenuItem>
+                    </MenuItem>
                     <MenuItem Header="Server Request" x:Name="mItemServerRequest" IsCheckable="True"  IsEnabled="True" Click="btnExecuteServerRequest_Click" />
-                    
+
                 </MenuItem>
             </Menu>
             <StackPanel></StackPanel>
@@ -52,7 +52,7 @@
 
             <Button x:Name="btnLoadExcelSheet" Content="Load Table" Background="YellowGreen" Margin="10,10,10,10" Width="100" Height="50" HorizontalAlignment="Left"  VerticalAlignment="Top"  Click="btnLoadExcelSheet_Click" />
         </WrapPanel>
-       
+
         <!-- Footer Panel -->
         <Grid Grid.Row="4" Background="#CCFFCC">
             <Label x:Name="lblSheetNames" Content="Sheet Name" HorizontalAlignment="Left" Width="150" VerticalAlignment="Top" FontWeight="Bold" FontStyle="Italic" FontSize="20" FontFamily="Sitka Text" />
@@ -64,12 +64,14 @@
             <ScrollViewer Height="150" Width="150" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="169,35,0,0" ScrollViewer.HorizontalScrollBarVisibility="Visible">
                 <StackPanel x:Name="stPanelColumnsName" HorizontalAlignment="Left" VerticalAlignment="Top"></StackPanel>
             </ScrollViewer>
-            
+
             <StackPanel x:Name="stPanelColumnMapper" HorizontalAlignment="Left" Margin="169,135,0,0" VerticalAlignment="Top" Visibility="Hidden"/>
             <Custom:DataGrid x:Name="dgLoadTable" HorizontalAlignment="Left" Margin="383,22,0,0" VerticalAlignment="Top" ItemsSource="{Binding}" AutomationProperties.IsColumnHeader="True" RenderTransformOrigin="-0.208,-6.469"></Custom:DataGrid>
 
         </Grid>
-        
-        
+    </Grid>
+    <Rectangle x:Name="rectDisableWindow" Fill="White" Opacity="0.7" Visibility="Hidden"  />
+        <!--You could add a 'Please Wait' TextBlock here-->
+        <TextBlock x:Name="txtBlockWaitMessage" Visibility="Hidden" Text="Please Wait...." TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
     </Grid>
 </Window>

@@ -27,6 +27,8 @@ namespace TestDataMapper
     {
         List<string> allSheetName = null;
         DataTable currentProcessingTable;
+        string filePath = "";
+        string sheetName = "";
         public MainWindow()
         {
             InitializeComponent();
@@ -81,21 +83,25 @@ namespace TestDataMapper
        
         public void LoadExcelSheet()
         {
-            string fileName = txtboxTestFileName.Text;
+            string fileName = filePath; //txtboxTestFileName.Text;
             FileInfo fi = new FileInfo(fileName);
             string extension = fi.Extension;
-            string sheetName = GetSelectedRadioButton(stPanelSheetNames);
+
+           // string sheetName = GetSelectedRadioButton(stPanelSheetNames);
+
            DataTable dt = ReadExcelSheet(fileName, extension,sheetName);
             DataTable testTable = ChangeColumnType(dt);
+            dt.Dispose();
             if (!object.ReferenceEquals(currentProcessingTable, null))
             {
                 currentProcessingTable.Dispose();
             }
             currentProcessingTable = testTable;
+
            // currentProcessingTable = dt;
-            dgLoadTable.DataContext = currentProcessingTable;
-            DeleteAllChildElement(stPanelColumnsName);
-            GenetateRadioButtonList(GetAllColumnNames(currentProcessingTable),stPanelColumnsName);
+            //dgLoadTable.DataContext = currentProcessingTable;
+            //DeleteAllChildElement(stPanelColumnsName);
+            //GenetateRadioButtonList(GetAllColumnNames(currentProcessingTable),stPanelColumnsName);
         }
 
         private List<string> GetAllColumnNames(DataTable testTable)
@@ -240,6 +246,7 @@ namespace TestDataMapper
         }
         private void BtnTestFile_Click(object sender, RoutedEventArgs e)
         {
+            
             // Create OpenFileDialog
             OpenFileDialog openFileDlg = new OpenFileDialog();
          //   openFileDlg.Filter = "Excel Files (*.xlsx)|*.xlsx|(*.xlsb)|*.xlsb";
@@ -268,15 +275,43 @@ namespace TestDataMapper
                 DeleteAllChildElement(stPanelSheetNames);
                 GenetateRadioButtonList(allSheetName, stPanelSheetNames);
             }
+
+            
         }
 
-        private void btnLoadExcelSheet_Click(object sender, RoutedEventArgs e)
+        private async void btnLoadExcelSheet_Click(object sender, RoutedEventArgs e)
         {
-            LoadExcelSheet();
+            rectDisableWindow.Visibility = Visibility.Visible;
+            txtBlockWaitMessage.Visibility = Visibility.Visible;
+
+            sheetName = GetSelectedRadioButton(stPanelSheetNames);
+            filePath = txtboxTestFileName.Text;
+            Task task = new Task(LoadExcelSheet);
+            task.Start();
+            await task;
+
+            // LoadExcelSheet();
+            DataTable dt2 = currentProcessingTable.Clone();
+            int count = 0;
+           foreach (DataRow dr in currentProcessingTable.Rows)
+            {
+                if (count < 100)
+                    dt2.Rows.Add(dr.ItemArray);
+                else
+                    break;
+                count++;
+            }
+            dgLoadTable.DataContext = dt2;
+            DeleteAllChildElement(stPanelColumnsName);
+            GenetateRadioButtonList(GetAllColumnNames(currentProcessingTable), stPanelColumnsName);
+
             mItemColumnValue.IsEnabled = true;
             mIemColumnName.IsEnabled = true;
             mIemExpressionBuilder.IsEnabled = true;
             mIemSelectFolder.IsEnabled = true;
+
+            rectDisableWindow.Visibility = Visibility.Hidden;
+            txtBlockWaitMessage.Visibility = Visibility.Hidden;
 
         }
         private void btnExecuteServerRequest_Click(object sender, RoutedEventArgs e)
