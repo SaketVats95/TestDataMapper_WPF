@@ -283,9 +283,9 @@ namespace TestDataMapper
         {
             DataSet ds = new DataSet();
             ds.Tables.Add(currentProcessingTable);
-            string filename = "..\\DumpFiles\\XPathMapper.xlsx";
+            string filename = "XPathMapper.xlsx";
             string fileExt = ".xlsx";
-          DataTable datatableMapper=  ReadExcelSheet(filename, fileExt, "Sheet2");
+          DataTable datatableMapper=  ReadExcelSheet(filename, fileExt, "Sheet2$");
             datatableMapper.TableName = "MapperTable";
             ds.Tables.Add(datatableMapper);
             DCTAsyncReuestHandling.RequestAddResponse rq = new DCTAsyncReuestHandling.RequestAddResponse(ds, currentProcessingTable.TableName, datatableMapper.TableName);
