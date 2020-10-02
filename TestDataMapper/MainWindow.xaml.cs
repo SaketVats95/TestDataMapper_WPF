@@ -6,6 +6,7 @@ using System.Data.OleDb;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -94,14 +95,20 @@ namespace TestDataMapper
             dt.Dispose();
             if (!object.ReferenceEquals(currentProcessingTable, null))
             {
+
+                currentProcessingTable.Clear();
                 currentProcessingTable.Dispose();
+                currentProcessingTable = null;
+                GC.Collect();
             }
             currentProcessingTable = testTable;
-
-           // currentProcessingTable = dt;
+            #region Commented Region
+            //testTable.Clear();
+            // currentProcessingTable = dt;
             //dgLoadTable.DataContext = currentProcessingTable;
             //DeleteAllChildElement(stPanelColumnsName);
             //GenetateRadioButtonList(GetAllColumnNames(currentProcessingTable),stPanelColumnsName);
+            #endregion
         }
 
         private List<string> GetAllColumnNames(DataTable testTable)
@@ -278,19 +285,29 @@ namespace TestDataMapper
 
             
         }
-
-        private async void btnLoadExcelSheet_Click(object sender, RoutedEventArgs e)
+        public void Show_PleaseWaitMessage()
         {
             rectDisableWindow.Visibility = Visibility.Visible;
             txtBlockWaitMessage.Visibility = Visibility.Visible;
+        }
+        public void Hide_PleaseWaitMessage()
+        {
+            rectDisableWindow.Visibility = Visibility.Hidden;
+            txtBlockWaitMessage.Visibility = Visibility.Hidden;
+        }
+        private async void btnLoadExcelSheet_Click(object sender, RoutedEventArgs e)
+        {
+            Show_PleaseWaitMessage();
 
             sheetName = GetSelectedRadioButton(stPanelSheetNames);
             filePath = txtboxTestFileName.Text;
+
             Task task = new Task(LoadExcelSheet);
             task.Start();
             await task;
 
             // LoadExcelSheet();
+
             DataTable dt2 = currentProcessingTable.Clone();
             int count = 0;
            foreach (DataRow dr in currentProcessingTable.Rows)
@@ -310,8 +327,7 @@ namespace TestDataMapper
             mIemExpressionBuilder.IsEnabled = true;
             mIemSelectFolder.IsEnabled = true;
 
-            rectDisableWindow.Visibility = Visibility.Hidden;
-            txtBlockWaitMessage.Visibility = Visibility.Hidden;
+            Hide_PleaseWaitMessage();
 
         }
         private void btnExecuteServerRequest_Click(object sender, RoutedEventArgs e)
@@ -329,25 +345,59 @@ namespace TestDataMapper
 
         }
 
-        private void BtnProcessCol_Click(object sender, RoutedEventArgs e)
+        private  void BtnProcessCol_Click(object sender, RoutedEventArgs e)
         {
+            
             string seletedCol = GetSelectedRadioButton(stPanelColumnsName);
-          List<string> uniqueValue = new List<string>();
-          
+
+            #region Treading Unblock MainWindow 
+            //Task task = Task.Run(() => OpenColumnMapping(seletedCol));
+            //task.Start();
+            //await task;
+            //OpenColumnMapping(seletedCol);
+            Thread newWindowThread = new Thread(()=> OpenColumnMapping(seletedCol));
+            newWindowThread.SetApartmentState(ApartmentState.STA);
+            newWindowThread.IsBackground = true;
+            newWindowThread.Start();
+            #endregion
+        }
+        public void OpenColumnMapping(string seletedCol)
+        {
+            List<string> uniqueValue = new List<string>();
             if (seletedCol != "")
             {
                 DataTable_Processing dataTable_Processing = new DataTable_Processing();
                 uniqueValue = dataTable_Processing.GetColUniqueValues(currentProcessingTable, seletedCol);
-           
+
                 if (uniqueValue.Count > 0)
                 {
+
                     DataTable dt = CreateColumnMapperTable(uniqueValue, seletedCol);
-                    ChildWindow chldWindow = new ChildWindow(dt);
-                    chldWindow.Show();
+                    //ChildWindow chldWindow = new ChildWindow(dt);
+                    //chldWindow.Show();
+                    ThreadStartingPoint(dt);
                     mIemExecuteCurrentDir.IsEnabled = true;
+                   // return dt;
                 }
             }
-            
+            //return new DataTable("");
+        }
+        private void ThreadStartingPoint(DataTable dt)
+        {
+            ChildWindow chldWindow = new ChildWindow(dt);
+            try
+            {
+                
+                chldWindow.Show();
+                System.Windows.Threading.Dispatcher.Run();
+
+            }
+            catch (ThreadAbortException)
+            {
+                chldWindow.Close();
+                //System.Windows.Threading.Dispatcher.InvokeShutdown();
+            }
+            //the CLR will "rethrow" thread abort exception automatically
         }
         public void DeleteAllChildElement(StackPanel st)
         {
