@@ -37,11 +37,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DCTAsyncReuestHandling">
-      <HintPath>..\..\..\..\..\..\Duck Creek Technologies LLC\Varma Pinnamaraju, Chaitanya - AsyncReuestAllHandelling\DCTAsyncReuestHandling\DCTAsyncReuestHandling\bin\Debug\DCTAsyncReuestHandling.dll</HintPath>
+    <Reference Include="DCTAsyncReuestHandling, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\dll\DCTAsyncReuestHandling.dll</HintPath>
     </Reference>
-    <Reference Include="EPPlus">
-      <HintPath>..\..\QBE_Filing_Upload\QBE_Filing_Upload\External Libraries\EPPlus.dll</HintPath>
+    <Reference Include="EPPlus, Version=4.5.1.0, Culture=neutral, PublicKeyToken=ea159fdaa78159a1, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\dll\EPPlus.dll</HintPath>
     </Reference>
     <Reference Include="ExtendedGrid, Version=4.5.2.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
