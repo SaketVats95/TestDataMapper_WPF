@@ -333,7 +333,7 @@ namespace TestDataMapper
         private void btnExecuteServerRequest_Click(object sender, RoutedEventArgs e)
         {
             DataSet ds = new DataSet();
-            ds.Tables.Add(currentProcessingTable);
+            ds.Tables.Add(currentProcessingTable.Copy());
             string filename = "XPathMapper.xlsx";
             string fileExt = ".xlsx";
           DataTable datatableMapper=  ReadExcelSheet(filename, fileExt, "Sheet2$");
@@ -341,7 +341,8 @@ namespace TestDataMapper
             ds.Tables.Add(datatableMapper);
             DCTAsyncReuestHandling.RequestAddResponse rq = new DCTAsyncReuestHandling.RequestAddResponse(ds, currentProcessingTable.TableName, datatableMapper.TableName);
             rq.ProcessAllInputData();
-            
+            ds.Dispose();
+            GC.Collect();
 
         }
 
