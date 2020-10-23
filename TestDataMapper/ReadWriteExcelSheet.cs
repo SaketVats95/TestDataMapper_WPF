@@ -114,7 +114,7 @@ namespace TestDataMapper
         public void WriteToExcel(DataTable table, string fileName = "")
         {
             ExcelPackage excel = new ExcelPackage();
-
+           
             //Add a new worksheet to workbook with the Datatable name
             var workSheet = excel.Workbook.Worksheets.Add(table.TableName.Replace("'", "").Trim());
             //excelWorkSheet.Name = dr.Key.ToString();
@@ -134,6 +134,7 @@ namespace TestDataMapper
                 {
                     try
                     {
+                        workSheet.Cells[j + 2, k + 1].Style.Numberformat.Format = "@";
                         workSheet.Cells[j + 2, k + 1].Value = table.Rows[j].ItemArray[k].ToString();
                     }
                     catch (Exception e)

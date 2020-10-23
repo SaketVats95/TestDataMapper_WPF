@@ -1,6 +1,7 @@
 ﻿using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using System.Data.OleDb;
 using System.IO;
@@ -63,9 +64,11 @@ namespace TestDataMapper
             else
             {
                 if (fileExt.CompareTo(".xls") == 0)
-                    conn = @"provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + fileName + ";Extended Properties='Excel 8.0;HRD=Yes;IMEX=1';"; //for below excel 2007  
+                    conn = @"provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + fileName + ";Extended Properties='Excel 8.0;HRD=Yes;IMEX=1';MAXSCANROWS=0;ImportMixedTypes=Text;"; //for below excel 2007  
                 else
-                    conn = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + fileName + ";Extended Properties='Excel 12.0;HDR=Yes';"; //for above excel 2007  
+                   // conn = @"Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + fileName + ";Extended Properties='Excel 8.0;HDR=Yes;IMEX=1;MAXSCANROWS=0;ImportMixedTypes=Text';"; //for above excel 2007  
+                conn = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + fileName + ";Extended Properties='Excel 12.0;HDR=Yes;IMEX=1;MAXSCANROWS=0;ImportMixedTypes=Text';"; //for above excel 2007  
+
                 using (OleDbConnection con = new OleDbConnection(conn))
                 {
                     try
@@ -341,8 +344,14 @@ namespace TestDataMapper
             ds.Tables.Add(datatableMapper);
             DCTAsyncReuestHandling.RequestAddResponse rq = new DCTAsyncReuestHandling.RequestAddResponse(ds, currentProcessingTable.TableName, datatableMapper.TableName);
             rq.ProcessAllInputData();
+            if (ConfigurationManager.AppSettings["WriteToExcel"].ToString() == "1")
+                {
+                ReadWriteExcelSheet readWriteExcelSheet = new ReadWriteExcelSheet();
+                readWriteExcelSheet.WriteToExcel(ds.Tables[currentProcessingTable.TableName]);
+               }
             ds.Dispose();
             GC.Collect();
+            MessageBox.Show("Request Processing Completed");
 
         }
 
