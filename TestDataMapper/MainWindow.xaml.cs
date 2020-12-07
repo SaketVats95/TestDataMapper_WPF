@@ -1,6 +1,7 @@
 ﻿using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using System.Data.OleDb;
 using System.IO;
@@ -22,6 +23,7 @@ using Excel = Microsoft.Office.Interop.Excel;
 
 namespace TestDataMapper
 {
+  
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
@@ -31,11 +33,12 @@ namespace TestDataMapper
         DataTable currentProcessingTable;
         string filePath = "";
         string sheetName = "";
+    
         public MainWindow()
         {
             InitializeComponent();
+          
 
-            
         }
         
     
@@ -64,9 +67,11 @@ namespace TestDataMapper
             else
             {
                 if (fileExt.CompareTo(".xls") == 0)
-                    conn = @"provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + fileName + ";Extended Properties='Excel 8.0;HRD=Yes;IMEX=1';"; //for below excel 2007  
+                    conn = @"provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + fileName + ";Extended Properties='Excel 8.0;HRD=Yes;IMEX=1';MAXSCANROWS=0;ImportMixedTypes=Text;"; //for below excel 2007  
                 else
-                    conn = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + fileName + ";Extended Properties='Excel 12.0;HDR=Yes';"; //for above excel 2007  
+                   // conn = @"Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + fileName + ";Extended Properties='Excel 8.0;HDR=Yes;IMEX=1;MAXSCANROWS=0;ImportMixedTypes=Text';"; //for above excel 2007  
+                conn = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + fileName + ";Extended Properties='Excel 12.0;HDR=Yes;IMEX=1;MAXSCANROWS=0;ImportMixedTypes=Text';"; //for above excel 2007  
+
                 using (OleDbConnection con = new OleDbConnection(conn))
                 {
                     try
@@ -299,6 +304,7 @@ namespace TestDataMapper
         }
         private async void btnLoadExcelSheet_Click(object sender, RoutedEventArgs e)
         {
+
             Show_PleaseWaitMessage();
 
             sheetName = GetSelectedRadioButton(stPanelSheetNames);
@@ -330,20 +336,46 @@ namespace TestDataMapper
             mIemSelectFolder.IsEnabled = true;
 
             Hide_PleaseWaitMessage();
-
+            lblRowCount.Content = "Row Count :" + currentProcessingTable.Rows.Count;
+            
         }
         private void btnExecuteServerRequest_Click(object sender, RoutedEventArgs e)
         {
+            Dictionary<string, string> serverrequests = new Dictionary<string, string>();
+            serverrequests.Add("Async", "3");
+            serverrequests.Add("Single_All", "1");
+            serverrequests.Add("Single_RowNumber", "2");
+            serverrequests.Add("Select_Server_Option", "");
+            string requestType = serverrequests[cboxServerRequestType.Text];
+
+           
+
+            string insurername = ConfigurationManager.AppSettings["insurerName"].ToString();
             DataSet ds = new DataSet();
-            ds.Tables.Add(currentProcessingTable);
+            ds.Tables.Add(currentProcessingTable.Copy());
             string filename = "XPathMapper.xlsx";
             string fileExt = ".xlsx";
           DataTable datatableMapper=  ReadExcelSheet(filename, fileExt, "Sheet2$");
+            foreach(DataRow dr in datatableMapper.Rows)
+            {
+                if(dr["InputOutputType"].ToString()== "Output")
+                {
+                    dr["XPath"]= dr["XPath"].ToString().Replace("Comparer/", "Comparer/"+insurername+"/"+insurername);
+                    
+                }
+            }
             datatableMapper.TableName = "MapperTable";
             ds.Tables.Add(datatableMapper);
-            DCTAsyncReuestHandling.RequestAddResponse rq = new DCTAsyncReuestHandling.RequestAddResponse(ds, currentProcessingTable.TableName, datatableMapper.TableName);
+            DCTAsyncReuestHandling.RequestAddResponse rq = new DCTAsyncReuestHandling.RequestAddResponse(ds, currentProcessingTable.TableName, datatableMapper.TableName,requestType,txtRowNumber.Text);
             rq.ProcessAllInputData();
-            
+            if (ConfigurationManager.AppSettings["WriteToExcel"].ToString() == "1")
+                {
+                ReadWriteExcelSheet readWriteExcelSheet = new ReadWriteExcelSheet();
+                readWriteExcelSheet.WriteToExcel(ds.Tables[currentProcessingTable.TableName], DateTime.Now.ToString("yyyyMMdd_HHmmssfff_")+currentProcessingTable.TableName+ ".xlsx");
+               }
+            ds.Dispose();
+            GC.Collect();
+            MessageBox.Show("Request Processing Completed");
 
         }
 
@@ -498,6 +530,18 @@ namespace TestDataMapper
             string dirPath = mappingInfoFolder != "" ? mappingInfoFolder + "//" + folderName : folderName;
             MappingWindow map = new MappingWindow(currentProcessingTable, dirPath);
             map.Show();
+        }
+
+        private void cboxServerRequestType_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if((cboxServerRequestType.SelectedItem as ComboBoxItem).Content.ToString() == "Single_RowNumber")
+            {
+                txtRowNumber.Visibility =Visibility.Visible;
+            }
+            else
+            {
+                txtRowNumber.Visibility = Visibility.Hidden;
+            }
         }
     }
 }

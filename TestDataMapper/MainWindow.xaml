@@ -67,8 +67,16 @@
 
             <StackPanel x:Name="stPanelColumnMapper" HorizontalAlignment="Left" Margin="169,135,0,0" VerticalAlignment="Top" Visibility="Hidden"/>
             <Custom:DataGrid x:Name="dgLoadTable" HorizontalAlignment="Left" Margin="383,22,0,0" VerticalAlignment="Top" ItemsSource="{Binding}" AutomationProperties.IsColumnHeader="True" RenderTransformOrigin="-0.208,-6.469"></Custom:DataGrid>
+                <Label  x:Name="lblRowCount"  HorizontalAlignment="Left" Margin="10,216,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+                <ComboBox SelectionChanged="cboxServerRequestType_SelectionChanged" x:Name="cboxServerRequestType" IsEditable="True" IsReadOnly="True" Text="Select_Server_Option" HorizontalAlignment="Left" Margin="199,282,0,0" VerticalAlignment="Top" Width="120">
+                    <ComboBoxItem  Content="Single_All"  />
+                    <ComboBoxItem Content="Single_RowNumber" />
+                    <ComboBoxItem Content="Async" />
+                </ComboBox>
+                <TextBox x:Name="txtRowNumber" Visibility="Hidden" HorizontalAlignment="Left" Height="23" Margin="30,283,0,0" TextWrapping="Wrap" Text="1" VerticalAlignment="Top" Width="120"/>
 
-        </Grid>
+            </Grid>
+            
     </Grid>
     <Rectangle x:Name="rectDisableWindow" Fill="White" Opacity="0.7" Visibility="Hidden"  />
         <!--You could add a 'Please Wait' TextBlock here-->
