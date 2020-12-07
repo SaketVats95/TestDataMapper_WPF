@@ -37,7 +37,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DCTAsyncReuestHandling">
+    <Reference Include="DCTAsyncReuestHandling, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>C:\Users\c.pinnamaraju\OneDrive - Duck Creek Technologies LLC\AsyncReuestAllHandelling\DCTAsyncReuestHandling\DCTAsyncReuestHandling\bin\Debug\DCTAsyncReuestHandling.dll</HintPath>
     </Reference>
     <Reference Include="EPPlus">

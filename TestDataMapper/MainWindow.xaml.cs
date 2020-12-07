@@ -345,9 +345,8 @@ namespace TestDataMapper
             serverrequests.Add("Single_RowNumber", "2");
             serverrequests.Add("Select_Server_Option", "");
             string requestType = serverrequests[cboxServerRequestType.Text];
-           
-       
 
+           
 
             string insurername = ConfigurationManager.AppSettings["insurerName"].ToString();
             DataSet ds = new DataSet();
@@ -533,9 +532,13 @@ namespace TestDataMapper
 
         private void cboxServerRequestType_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if(cboxServerRequestType.Text=="Single_RowNumber")
+            if((cboxServerRequestType.SelectedItem as ComboBoxItem).Content.ToString() == "Single_RowNumber")
             {
                 txtRowNumber.Visibility =Visibility.Visible;
+            }
+            else
+            {
+                txtRowNumber.Visibility = Visibility.Hidden;
             }
         }
     }
