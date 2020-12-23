@@ -250,10 +250,13 @@ namespace TestDataMapper
                 //};
                 //rb.Unchecked += (sender, args) => { /* Do stuff */ };
                 rb.Tag = i;
-                if(i == 0)
+                if (i == 0)
                 {
                     rb.IsChecked = true;
                 }
+                rb.Checked += (ss, ee) => {
+                    btnLoadExcelSheet_Click(ss, ee);
+                };
                 st.Children.Add(rb);
                 i++;
             }
@@ -289,6 +292,8 @@ namespace TestDataMapper
                 DeleteAllChildElement(stPanelSheetNames);
                 GenetateRadioButtonList(allSheetName, stPanelSheetNames);
             }
+
+            btnLoadExcelSheet_Click(sender, e);
 
             
         }
