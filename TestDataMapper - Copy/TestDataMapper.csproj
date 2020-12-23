@@ -39,15 +39,13 @@
   <ItemGroup>
     <Reference Include="DCTAsyncReuestHandling, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\dll\DCTAsyncReuestHandling.dll</HintPath>
+      <HintPath>C:\Users\c.pinnamaraju\OneDrive - Duck Creek Technologies LLC\AsyncReuestAllHandelling\DCTAsyncReuestHandling\DCTAsyncReuestHandling\bin\Debug\DCTAsyncReuestHandling.dll</HintPath>
     </Reference>
-    <Reference Include="EPPlus, Version=4.5.1.0, Culture=neutral, PublicKeyToken=ea159fdaa78159a1, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\dll\EPPlus.dll</HintPath>
+    <Reference Include="EPPlus">
+      <HintPath>..\..\saket\TestDataMapper_WPF-master\TestDataMapper_WPF-master\TestDataMapper\bin\Debug\EPPlus.dll</HintPath>
     </Reference>
-    <Reference Include="ExtendedGrid, Version=4.5.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\Downloads\WPFExtendedDataGrid\sourceCode\sourceCode\WPF Extended DataGrid 2015\ExtendedGrid\bin\Debug\ExtendedGrid.dll</HintPath>
+    <Reference Include="ExtendedGrid">
+      <HintPath>C:\Users\c.pinnamaraju\OneDrive - Duck Creek Technologies LLC\AsyncReuestAllHandelling\DLLSTestApp\ExtendedGrid.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.WindowsAPICodePack, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\WindowsAPICodePack-Core.1.1.1\lib\Microsoft.WindowsAPICodePack.dll</HintPath>
@@ -62,23 +60,9 @@
       <HintPath>..\packages\Ookii.Dialogs.Wpf.1.1.0\lib\net45\Ookii.Dialogs.Wpf.dll</HintPath>
     </Reference>
     <Reference Include="PresentationFramework.Aero" />
-    <Reference Include="Syncfusion.Edit.WPF, Version=18.3460.0.53, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
-      <HintPath>..\packages\Syncfusion.Edit.WPF.18.3.0.53\lib\net46\Syncfusion.Edit.WPF.dll</HintPath>
-    </Reference>
-    <Reference Include="Syncfusion.GridCommon.WPF, Version=18.3460.0.53, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
-      <HintPath>..\packages\Syncfusion.GridCommon.Wpf.18.3.0.53\lib\net46\Syncfusion.GridCommon.WPF.dll</HintPath>
-    </Reference>
-    <Reference Include="Syncfusion.Licensing, Version=18.3460.0.53, Culture=neutral, PublicKeyToken=632609b4d040f6b4, processorArchitecture=MSIL">
-      <HintPath>..\packages\Syncfusion.Licensing.18.3.0.53\lib\net46\Syncfusion.Licensing.dll</HintPath>
-    </Reference>
-    <Reference Include="Syncfusion.Shared.WPF, Version=18.3460.0.53, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
-      <HintPath>..\packages\Syncfusion.Shared.WPF.18.3.0.53\lib\net46\Syncfusion.Shared.WPF.dll</HintPath>
-    </Reference>
-    <Reference Include="Syncfusion.Tools.WPF, Version=18.3460.0.53, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
-      <HintPath>..\packages\Syncfusion.Tools.WPF.18.3.0.53\lib\net46\Syncfusion.Tools.WPF.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
     <Reference Include="System.Design" />
     <Reference Include="System.Drawing" />
@@ -120,9 +104,6 @@
       <DependentUpon>ExpressionManager.xaml</DependentUpon>
     </Compile>
     <Compile Include="ReadWriteExcelSheet.cs" />
-    <Compile Include="SingleRequestWindow.xaml.cs">
-      <DependentUpon>SingleRequestWindow.xaml</DependentUpon>
-    </Compile>
     <Page Include="ChildWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -162,10 +143,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="SingleRequestWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MappingWindow.xaml.cs">
@@ -188,6 +165,25 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="bin\Debug\Allianz_testcase_step1\ACCIDENTS_IN_5_YRS.json" />
+    <None Include="bin\Debug\Allianz_testcase_step1\AT_FAULT_ACCIDENTS_WITHIN_2_YRS.json" />
+    <None Include="bin\Debug\Allianz_testcase_step1\BLUESLIP.json" />
+    <None Include="bin\Debug\Allianz_testcase_step1\CONVICTIONS_IN_LAST_3_YRS.json" />
+    <None Include="bin\Debug\Allianz_testcase_step1\CURRENT_CTP_COMPANY.json" />
+    <None Include="bin\Debug\Allianz_testcase_step1\ExpressionsList.json" />
+    <None Include="bin\Debug\Allianz_testcase_step1\GENDER.json" />
+    <None Include="bin\Debug\Allianz_testcase_step1\GREENSLIP.json" />
+    <None Include="bin\Debug\Allianz_testcase_step1\INDIVIDUAL_OR_COMPANY.json" />
+    <None Include="bin\Debug\Allianz_testcase_step1\ITC.json" />
+    <None Include="bin\Debug\Allianz_testcase_step1\KILOMETRES.json" />
+    <None Include="bin\Debug\Allianz_testcase_step1\OTHER_MOTOR_INSURANCE.json" />
+    <None Include="bin\Debug\Allianz_testcase_step1\PILLION_PASSENGER.json" />
+    <None Include="bin\Debug\Allianz_testcase_step1\SUSPENSIONS_IN_LAST_3_YRS.json" />
+    <None Include="bin\Debug\Allianz_testcase_step1\VEHICLE_TYPE.json" />
+    <None Include="bin\Debug\Allianz_testcase_step1\VEHICLE_USED_FOR.json" />
+    <None Include="bin\Debug\Allianz_testcase_step2\EngineCapacity.json" />
+    <None Include="bin\Debug\Allianz_testcase_step3\ColumnNameList.json" />
+    <None Include="bin\Debug\XPathMapper.xlsx" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

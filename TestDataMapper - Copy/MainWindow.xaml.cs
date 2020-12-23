@@ -6,7 +6,6 @@ using System.Data;
 using System.Data.OleDb;
 using System.IO;
 using System.Linq;
-using System.Runtime;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -94,20 +93,19 @@ namespace TestDataMapper
             FileInfo fi = new FileInfo(fileName);
             string extension = fi.Extension;
 
+           // string sheetName = GetSelectedRadioButton(stPanelSheetNames);
+
+           DataTable dt = ReadExcelSheet(fileName, extension,sheetName);
+            DataTable testTable = ChangeColumnType(dt);
+            dt.Dispose();
             if (!object.ReferenceEquals(currentProcessingTable, null))
             {
+
                 currentProcessingTable.Clear();
                 currentProcessingTable.Dispose();
                 currentProcessingTable = null;
-                GCSettings.LargeObjectHeapCompactionMode = GCLargeObjectHeapCompactionMode.CompactOnce;
                 GC.Collect();
             }
-            // string sheetName = GetSelectedRadioButton(stPanelSheetNames);
-
-            DataTable dt = ReadExcelSheet(fileName, extension,sheetName);
-            DataTable testTable = ChangeColumnType(dt);
-            dt.Dispose();
-            
             currentProcessingTable = testTable;
             #region Commented Region
             //testTable.Clear();
@@ -366,13 +364,6 @@ namespace TestDataMapper
             }
             datatableMapper.TableName = "MapperTable";
             ds.Tables.Add(datatableMapper);
-            if (requestType == "2")
-            {
-                SingleRequestWindow singleRequestWindow = new SingleRequestWindow(ds, currentProcessingTable.TableName, datatableMapper.TableName, requestType, txtRowNumber.Text);
-                singleRequestWindow.ProcessSingleInputData();
-                singleRequestWindow.Show();
-                return;
-            }
             DCTAsyncReuestHandling.RequestAddResponse rq = new DCTAsyncReuestHandling.RequestAddResponse(ds, currentProcessingTable.TableName, datatableMapper.TableName,requestType,txtRowNumber.Text);
             rq.ProcessAllInputData();
             if (ConfigurationManager.AppSettings["WriteToExcel"].ToString() == "1")

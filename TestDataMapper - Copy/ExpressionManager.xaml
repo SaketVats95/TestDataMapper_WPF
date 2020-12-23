@@ -1,0 +1,43 @@
+﻿<Window xmlns:my="http://schemas.microsoft.com/wpf/2008/toolkit"  x:Class="TestDataMapper.ExpressionManager"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TestDataMapper"
+        mc:Ignorable="d"
+        Title="ExpressionManager" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <!-- Header Panel -->
+        <Border Grid.Row="0" Background="#CCCCCC" Padding="11">
+            <!-- Replace this TextBlock with your header content. -->
+            <Label x:Name="lblExpresionFIleName" Content="ExpressionsList" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" FontStyle="Italic" FontSize="22" FontFamily="Sitka Text" />
+        </Border>
+
+        <!-- Body Panel -->
+        <Grid Grid.Row="1" Background="#CCCCFF">
+            <Border Grid.Row="0" Background="#FFCCCC" Padding="11">
+                <!-- Replace this TextBlock with your upper body content. -->
+                <my:DataGrid x:Name="dgLoadExpressionTable" HorizontalAlignment="Center"  VerticalAlignment="Center" ItemsSource="{Binding}">
+                </my:DataGrid>
+            </Border>
+        </Grid>
+
+        <!-- Footer Panel -->
+        <Grid Grid.Row="2" Background="#CCFFCC" Height="50">
+            <!-- Replace this TextBlock with your footer content. -->
+            <Label x:Name="lblTotalCount" Content="Unique Count : 0" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold" FontStyle="Italic" FontSize="22" FontFamily="Sitka Text" />
+            <Label x:Name="lblSavedFilePath" Content="Saved File Path" HorizontalAlignment="Left" VerticalAlignment="Center"  FontSize="10" FontFamily="Sitka Text" Margin="230,6,0,7" Visibility="Hidden"/>
+            <Button x:Name="btnApplyExpressions" Content="Apply Expressions" HorizontalAlignment="Center" Width="100" Click="btnApplyExpression_Click" Margin="506,0,187.6,1"/>
+            <Button x:Name="btnResetChanges" Content="Reset Changes"  HorizontalAlignment="Center" Width="100" Click="btnBackToPreviousState_Click" Margin="636,0,57.6,0"/>
+            <Button x:Name="btnSaveDataTable" Content="Save Current Table" HorizontalAlignment="Center" Width="156" Click="btnSavetoExcelSheet_Click" FontWeight="Bold" FontSize="15" Margin="291,2,346.6,0"/>
+            <Button x:Name="btnPreviewDT" Content="Preview Table"  Background="YellowGreen" Margin="195,10,0,-10" Width="100" Height="50" HorizontalAlignment="Left"  VerticalAlignment="Top" Click="BtnPreviewDT_Click"  />
+
+        </Grid>
+    </Grid>
+</Window>

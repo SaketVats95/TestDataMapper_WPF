@@ -23,7 +23,7 @@ namespace TestDataMapper
     {
         Dictionary<string,string> allExpressions = new Dictionary<string, string>();
         DataTable dataTable = new DataTable();
-        //DataTable backupTable;
+        DataTable backupTable;
         public ExpressionType enm_Exp = ExpressionType.String;
 
         public ExpressionBuilder()

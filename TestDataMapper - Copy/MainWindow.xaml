@@ -1,0 +1,85 @@
+﻿<Window xmlns:ExtendedGridControl="clr-namespace:ExtendedGrid.ExtendedGridControl;assembly=ExtendedGrid"   
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TestDataMapper"
+        xmlns:Custom="http://schemas.microsoft.com/wpf/2008/toolkit" x:Class="TestDataMapper.MainWindow"
+        xmlns:wpfx ="http://schemas.microsoft.com/winfx/2006/xaml/presentation/toolkit/extended" 
+        mc:Ignorable="d"
+        xmlns:chartingToolkit="clr-namespace:System.Windows.Controls.DataVisualization.Charting;assembly=System.Windows.Controls.DataVisualization.Toolkit"
+        Title="MainWindow">
+    <Grid>
+        <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <DockPanel Grid.Row="0" LastChildFill="False">
+            <Menu DockPanel.Dock="Top">
+                <MenuItem Header="Processing Option">
+                    <MenuItem Header="Create Mapping">
+                        <MenuItem x:Name="mItemColumnValue" Header="Column Value" IsCheckable="False" Click="BtnProcessCol_Click" IsEnabled="False"/>
+                        <MenuItem x:Name="mIemColumnName" Header="Column Name" IsCheckable="False" Click="BtnProcessColName_Click" IsEnabled="False"/>
+                        <MenuItem x:Name="mIemExpressionBuilder" Header="Expression Builder" IsCheckable="False" Click="BtnExpressionBuilder_Click" IsEnabled="False"/>
+                    </MenuItem>
+                    <MenuItem Header="Execute Mapping" >
+                        <MenuItem x:Name="mIemExecuteCurrentDir" Header="Current Folder" IsCheckable="True" Click="BtnExecuteCurrentFolder_Click" IsEnabled="False"/>
+                        <MenuItem x:Name="mIemSelectFolder" Header="Select Folder" IsCheckable="False" Click="BtnExecuteMapping_Click" IsEnabled="False"/>
+                    </MenuItem>
+                    <MenuItem Header="Server Request" x:Name="mItemServerRequest" IsCheckable="True"  IsEnabled="True" Click="btnExecuteServerRequest_Click" />
+
+                </MenuItem>
+            </Menu>
+            <StackPanel></StackPanel>
+        </DockPanel>
+
+
+
+        <!-- Header Panel -->
+        <Border Grid.Row="1" Background="#CCCCCC" Padding="11" >
+            <!-- Replace this TextBlock with your header content. -->
+            <Label x:Name="lblColumnName" Content="Main Window" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" FontStyle="Italic" FontSize="20" FontFamily="Sitka Text" />
+        </Border>
+        <WrapPanel Grid.Row="2" Background="#CCCCFF" >
+            <Label x:Name="lblTestFile" VerticalContentAlignment="Center" Content="Select Test File"  HorizontalAlignment="Left" Margin="10,10,10,10" Height="50" VerticalAlignment="Top"/>
+            <TextBox x:Name="txtboxTestFileName" HorizontalAlignment="Left" Height="50" Margin="10,10,10,10" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="400"/>
+            <Button x:Name="btnTestFile" Content="Select" HorizontalAlignment="Left" Margin="10,10,10,10" Width="75" Click="BtnTestFile_Click"/>
+
+            <Button x:Name="btnLoadExcelSheet" Content="Load Table" Background="YellowGreen" Margin="10,10,10,10" Width="100" Height="50" HorizontalAlignment="Left"  VerticalAlignment="Top"  Click="btnLoadExcelSheet_Click" />
+        </WrapPanel>
+
+        <!-- Footer Panel -->
+        <Grid Grid.Row="4" Background="#CCFFCC">
+            <Label x:Name="lblSheetNames" Content="Sheet Name" HorizontalAlignment="Left" Width="150" VerticalAlignment="Top" FontWeight="Bold" FontStyle="Italic" FontSize="20" FontFamily="Sitka Text" />
+            <ScrollViewer Height="150" Width="150" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,35,0,0" ScrollViewer.HorizontalScrollBarVisibility="Visible">
+                <StackPanel x:Name="stPanelSheetNames" HorizontalAlignment="Left"  VerticalAlignment="Top" />
+            </ScrollViewer>
+            <Label x:Name="lblColumnNames" Content="Column Name" HorizontalAlignment="Left" Width="150" VerticalAlignment="Top" FontWeight="Bold" FontStyle="Italic" FontSize="20" FontFamily="Sitka Text" Margin="169,0,0,0" />
+
+            <ScrollViewer Height="150" Width="150" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="169,35,0,0" ScrollViewer.HorizontalScrollBarVisibility="Visible">
+                <StackPanel x:Name="stPanelColumnsName" HorizontalAlignment="Left" VerticalAlignment="Top"></StackPanel>
+            </ScrollViewer>
+
+            <StackPanel x:Name="stPanelColumnMapper" HorizontalAlignment="Left" Margin="169,135,0,0" VerticalAlignment="Top" Visibility="Hidden"/>
+            <Custom:DataGrid x:Name="dgLoadTable" HorizontalAlignment="Left" Margin="383,22,0,0" VerticalAlignment="Top" ItemsSource="{Binding}" AutomationProperties.IsColumnHeader="True" RenderTransformOrigin="-0.208,-6.469"></Custom:DataGrid>
+                <Label  x:Name="lblRowCount"  HorizontalAlignment="Left" Margin="10,216,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+                <ComboBox SelectionChanged="cboxServerRequestType_SelectionChanged" x:Name="cboxServerRequestType" IsEditable="True" IsReadOnly="True" Text="Select_Server_Option" HorizontalAlignment="Left" Margin="199,282,0,0" VerticalAlignment="Top" Width="120">
+                    <ComboBoxItem  Content="Single_All"  />
+                    <ComboBoxItem Content="Single_RowNumber" />
+                    <ComboBoxItem Content="Async" />
+                </ComboBox>
+                <TextBox x:Name="txtRowNumber" Visibility="Hidden" HorizontalAlignment="Left" Height="23" Margin="30,283,0,0" TextWrapping="Wrap" Text="1" VerticalAlignment="Top" Width="120"/>
+
+            </Grid>
+            
+    </Grid>
+    <Rectangle x:Name="rectDisableWindow" Fill="White" Opacity="0.7" Visibility="Hidden"  />
+        <!--You could add a 'Please Wait' TextBlock here-->
+        <TextBlock x:Name="txtBlockWaitMessage" Visibility="Hidden" Text="Please Wait...." TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
+    </Grid>
+</Window>
