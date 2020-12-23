@@ -364,6 +364,13 @@ namespace TestDataMapper
             }
             datatableMapper.TableName = "MapperTable";
             ds.Tables.Add(datatableMapper);
+            if (requestType == "2")
+            {
+                SingleRequestWindow singleRequestWindow = new SingleRequestWindow(ds, currentProcessingTable.TableName, datatableMapper.TableName, requestType, txtRowNumber.Text);
+                singleRequestWindow.ProcessSingleInputData();
+                singleRequestWindow.Show();
+                return;
+            }
             DCTAsyncReuestHandling.RequestAddResponse rq = new DCTAsyncReuestHandling.RequestAddResponse(ds, currentProcessingTable.TableName, datatableMapper.TableName,requestType,txtRowNumber.Text);
             rq.ProcessAllInputData();
             if (ConfigurationManager.AppSettings["WriteToExcel"].ToString() == "1")
